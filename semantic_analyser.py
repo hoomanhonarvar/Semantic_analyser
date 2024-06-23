@@ -1,6 +1,7 @@
 import json
 import pandas as pd
-from nutree import Tree, Node
+from nutree import Tree, Node, IterMethod
+
 data=[]
 main_symbol_table = pd.DataFrame(data, columns=[ 'word', 'name', 'type','line'])
 #adding key words to symbol table
@@ -37,9 +38,17 @@ class SymbolTable:
             return self.parent.lookup(name)
         else:
             return f'Undefined variable: {name}'
-
-class SemanticAnalyzer():
-    def __int__(self,parse_tree):
+def get_perv_siblings(node):
+    list=[]
+    if node!=node.first_sibling():
+        prev_node=node.prev_sibling()
+        list.append(prev_node)
+        while node.parent.first_child()!=prev_node:
+            prev_node=prev_node.prev_sibling()
+            list.append(prev_node)
+    return list
+class SemanticAnalyzer:
+    def __init__(self,parse_tree):
         self.parse_tree=parse_tree
         self.global_scope=SymbolTable()
         self.current_scope=self.global_scope
@@ -47,32 +56,146 @@ class SemanticAnalyzer():
         return self._analyze_node(self.parse_tree)
 
     def _analyze_node(self, node):
-        if node[0] == 'number':
-            return node  # No semantic check needed for number literals
-        elif node[0] == 'identifier':
-            self.current_scope.lookup(node[1])
-            return node
-        elif node[0] == 'binop':
-            left = self._analyze_node(node[1])
-            right = self._analyze_node(node[3])
-            op = node[2][1]
-            if op in ('+', '-', '*', '/'):
-                if left[0] != 'number' or right[0] != 'number':
-                    raise TypeError('Operands must be numbers')
-            return ('binop', left, node[2], right)
-        elif node[0] == 'assignment':
-            identifier = node[1]
-            value = self._analyze_node(node[2])
-            self.current_scope.define(identifier[1], value)
-            return ('assignment', identifier, value)
-        elif node[0] == 'block':
-            self._enter_scope()
-            for stmt in node[1]:
-                self._analyze_node(stmt)
-            self._exit_scope()
-            return ('block', node[1])
-        else:
-            raise ValueError(f'Unknown node type: {node[0]}')
+        # # print("node is ",node.name)
+        # if (len(node.children))!=0:
+        #     for i in node.children:
+        #         # print(f"{i} child is :", i.name)
+        #         if node[0] == 'number':
+        #             return node  # No semantic check needed for number literals
+        #         elif node[0] == 'identifier':
+        #             self.current_scope.lookup(node[1])
+        #             return node
+        #         elif node[0] == 'binop':
+        #             left = self._analyze_node(node[1])
+        #             right = self._analyze_node(node[3])
+        #             op = node[2][1]
+        #             if op in ('+', '-', '*', '/'):
+        #                 if left[0] != 'number' or right[0] != 'number':
+        #                     raise TypeError('Operands must be numbers')
+        #             return ('binop', left, node[2], right)
+        #         elif node[0] == 'assignment':
+        #             identifier = node[1]
+        #             value = self._analyze_node(node[2])
+        #             self.current_scope.define(identifier[1], value)
+        #             return ('assignment', identifier, value)
+        #         elif node[0] == 'block':
+        #             self._enter_scope()
+        #             for stmt in node[1]:
+        #                 self._analyze_node(stmt)
+        #             self._exit_scope()
+        #             return ('block', node[1])
+        #         else:
+        #             raise ValueError(f'Unknown node type: {node[0]}')
+        #         # self._analyze_node(i)
+        # else:
+        #     print(node.name)
+        for node in loaded_tree.iterator(method=IterMethod.PRE_ORDER):
+            if node==node.last_sibling():
+                #do the last semantic action
+                print("hello")
+            if not node.is_leaf():
+                match node.name:
+                    case "program":
+                        print("hello")
+                    case "FunctionDeclarations":
+                        print("hello")
+                    case "FunctionDeclaration":
+                        print("hello")
+                    case "ParameterList":
+                        print("hello")
+                    case "ParameterListPrime":
+                        print("hello")
+                    case "Parameter":
+                        print("hello")
+                    case "Declarations":
+                        print("hello")
+                    case "Declaration":
+                        print("hello")
+                    case "AssignmentPrime":
+                        print("hello")
+                    case "Type":
+                        print("hello")
+                    case "ArraySpecifier":
+                        print("hello")
+                    case "Num":
+                        print("hello")
+                    case "Statements":
+                        print("hello")
+                    case "Statement":
+                        print("hello")
+                    case "StatementPrime":
+                        print("hello")
+                    case "Assignment":
+                        print("hello")
+                    case "PrintStatement":
+                        print("hello")
+                    case "FormattingString":
+                        print("hello")
+                    case "ExpressionList":
+                        print("hello")
+                    case "ExpressionsList":
+                        print("hello")
+                    case "Loop":
+                        print("hello")
+                    case "IfStatement":
+                        print("hello")
+                    case "ElsePart":
+                        print("hello")
+                    case "Block":
+                        print("hello")
+                    case "Condition":
+                        print("hello")
+                    case "RO_Expression":
+                        print("hello")
+                    case "T_ROp":
+                        print("hello")
+                    case "ConditionPrime":
+                        print("hello")
+                    case "T_LOp":
+                        print("hello")
+                    case "Expression":
+                        print("hello")
+                    case "Term":
+                        print("hello")
+                    case "TermPrime":
+                        print("hello")
+                    case "Aop":
+                        print("hello")
+                    case "Factor":
+                        print("hello")
+                    case "FunctionCall":
+                        print("hello")
+                    case "ArgumentList":
+                        print("hello")
+                    case "ArgumentListPrime":
+                        print("hello")
+                    case "Condition_tmp":
+                        print("hello")
+                    case "FunctionCallPrime":
+                        print("hello")
+                    case "Assignment_Declaration":
+                        print("hello")
+                    case "Operation":
+                        print("hello")
+                    case "ExpressionPrime":
+                        print("hello")
+                    case "Exp_Or_None":
+                        print("hello")
+            else:
+                match node.name:
+                    case "T_Id":
+                        print("hello")
+                    case "T_String":
+                        print("hello")
+                    case "T_Character":
+                        print("hello")
+                    case "T_Decimal":
+                        print("hello")
+                    case "T_Hexadecimal":
+                        print("hello")
+                    case "_":
+                        print("hello")
+
 
     def _enter_scope(self):
         new_scope = SymbolTable(parent=self.current_scope)
@@ -81,59 +204,8 @@ class SemanticAnalyzer():
     def _exit_scope(self):
         self.current_scope = self.current_scope.parent
 
-
-class Parser:
-    def __init__(self, tokens):
-        self.tokens = tokens
-        self.current_token_index = 0
-
-    def parse(self):
-        return self.block()
-
-    def block(self):
-        statements = []
-        while self.current_token_index < len(self.tokens):
-            statements.append(self.statement())
-        return ('block', statements)
-
-    def statement(self):
-        token = self.tokens[self.current_token_index]
-        if token[0] == 'ID' and self._peek()[0] == 'ASSIGN':
-            return self.assignment()
-        else:
-            return self.expression()
-
-    def assignment(self):
-        identifier = self.tokens[self.current_token_index]
-        self.current_token_index += 1  # Skip the identifier
-        self.current_token_index += 1  # Skip the '='
-        value = self.expression()
-        if self._peek()[0] == 'END':
-            self.current_token_index += 1  # Skip the ';'
-        return ('assignment', identifier, value)
-
-    def expression(self):
-        left = self.term()
-        while self.current_token_index < len(self.tokens) and self.tokens[self.current_token_index][0] in ('OP',):
-            op = self.tokens[self.current_token_index]
-            self.current_token_index += 1
-            right = self.term()
-            left = ('binop', left, op, right)
-        return left
-
-    def term(self):
-        token = self.tokens[self.current_token_index]
-        self.current_token_index += 1
-        if token[0] == 'NUMBER':
-            return ('number', token[1])
-        elif token[0] == 'ID':
-            return ('identifier', token[1])
-        raise SyntaxError(f'Unexpected token: {token}')
-
-    def _peek(self):
-        if self.current_token_index < len(self.tokens):
-            return self.tokens[self.current_token_index]
-        return None
-
-
 loaded_tree = load_tree_from_file("parse_tree.json")
+
+semantic_analyzer=SemanticAnalyzer(loaded_tree)
+semantic_analyzer.analyze()
+
