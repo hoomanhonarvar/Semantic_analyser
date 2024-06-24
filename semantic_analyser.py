@@ -5,6 +5,13 @@ from nutree import Tree, Node, IterMethod
 data=[]
 main_symbol_table = pd.DataFrame(data, columns=[ 'word', 'name', 'type','line'])
 #adding key words to symbol table
+class customNode:
+    def __init__(self,name):
+        self.value=0
+        self.type=""
+        self.expected_type=""
+        self.name=name
+
 f=open("tokens_without_space.txt")
 def reverse_sibling_order(node: Tree):
     # If the node has children, reverse the order of the children
@@ -14,11 +21,11 @@ def reverse_sibling_order(node: Tree):
         for child in node.children:
             reverse_sibling_order(child)
 def dict_to_tree(data, parent=Tree("Parse Tree")):
-    node=parent.add(data["name"])
+    new_node=parent.add(customNode(data["name"]))
 
     for child_data in data.get("children", []):
-        dict_to_tree(child_data, parent=node)
-    return node
+        dict_to_tree(child_data, parent=new_node)
+    return new_node
 
 def load_tree_from_file(filename):
     with open(filename, 'r') as f:
@@ -102,7 +109,7 @@ class SemanticAnalyzer:
                 # print("hello")
                 x = 2
             if not node.is_leaf():
-                match node.name:
+                match node.data.name:
                     case "program":
                         x=2
                     case "FunctionDeclarations":
@@ -192,27 +199,28 @@ class SemanticAnalyzer:
                     case "_":
                         raise ValueError(f'Unknown node type: {node[0]}')
             else:
-                if node.name!="ε":
+                if node.data.name!="ε":
                     y=(f.readline())
-                    print(y,node.name)
-                match node.name:
+                    # print(y,node.name)
+                match node.data.name:
                     #self.current_scope.define(identifier[1], value)
                     case "T_Id":
-                        x=2
+                        print(y, node.data.name)
+
                     case "T_String":
-                        x=2
+                        string = y.split('"')[1]
                     case "T_Character":
-                        x=2
+                        char = y.split("'")[1]
                     case "T_Decimal":
-                        print(y,node.name)
+                        num=y.split(" ")[2]
                     case "T_Hexadecimal":
-                        x=2
+                        num = y.split(" ")[2]
                     case "T_LC":
                         self._enter_scope()
                     case "T_RC":
                         self._exit_scope()
                     case "_":
-                        x=2
+                        print(y, node.name)
 
 
     def _enter_scope(self):
@@ -225,7 +233,7 @@ class SemanticAnalyzer:
 loaded_tree = load_tree_from_file("parse_tree.json")
 # print_tree(loaded_tree)
 reverse_sibling_order(loaded_tree)
-print_tree(loaded_tree)
+# print_tree(loaded_tree)
 semantic_analyzer=SemanticAnalyzer(loaded_tree)
 semantic_analyzer.analyze()
 

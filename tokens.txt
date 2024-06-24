@@ -14,29 +14,48 @@
 6 :T_Whitespace
 6 :T_Comment
 7 :T_Whitespace
-7 :T_If
+7 :T_Int
 7 :T_Whitespace
-7 :T_LP
-7 :13 x
+7 :13 a
 7 :T_Whitespace
-7 :T_ROp_G
+7 :T_Assign
 7 :T_Whitespace
-7 :14 y
-7 :T_RP
-7 :T_LC
+7 :T_Decimal 3
+7 :T_Whitespace
+7 :T_Semicolon
 7 :T_Whitespace
 8 :T_Whitespace
-8 :T_Print
-8 :T_LP
-8 :T_String  "x is greater than y"
-8 :T_RP
+8 :T_Int
+8 :T_Whitespace
+8 :14 a
+8 :T_Whitespace
+8 :T_Assign
+8 :T_Whitespace
+8 :T_Hexadecimal 0xab23
+8 :T_Whitespace
 8 :T_Semicolon
 8 :T_Whitespace
 9 :T_Whitespace
-9 :T_RC
+9 :T_Int
+9 :T_Whitespace
+9 :15 a
+9 :T_Whitespace
+9 :T_Assign
+9 :T_String  " dsfklj"
+9 :T_Semicolon
 9 :T_Whitespace
 10 :T_Whitespace
+10 :T_Int
+10 :T_Whitespace
+10 :17 a
+10 :T_Whitespace
+10 :T_Assign
+10 :T_Whitespace
+10 :T_Character : 'd'
+10 :T_Whitespace
+10 :T_Semicolon
+10 :T_Whitespace
 11 :T_Whitespace
-11 :T_RC
-11 :T_Whitespace
+12 :T_RC
 12 :T_Whitespace
+13 :T_Whitespace
