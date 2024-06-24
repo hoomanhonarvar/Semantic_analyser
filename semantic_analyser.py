@@ -45,17 +45,18 @@ class SymbolTable:
         self.symbols={}
 
     def define(self, name,type):
-        print(len(self.symbols))
         self.symbols[name]=type
-    def lookup(self, name):
+    def lookup_current(self, name):
         if name in self.symbols:
             return self.symbols[name]
-
-        # elif self.parent:
-        #     return self.parent.lookup(name)
         # else:
         #     return f'Undefined variable: {name}'
-
+        else:
+            return None
+    def lookup_parent(self,name):
+        if self.parent:
+            if name in self.parent.symbols:
+                return self.parent.symbols[name]
         else:
             return None
 def get_perv_siblings(node):
@@ -212,15 +213,37 @@ class SemanticAnalyzer:
                 match node.data.name:
                     #self.current_scope.define(identifier[1], value)
                     case "T_Id":
+                        if node.is_last_sibling():
+                            founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
+                        elif not node.next_sibling().is_leaf():
+                            if not node.next_sibling().first_child().is_leaf():
+                                if node.next_sibling().first_child().first_child().data.name=="T_LP" :
+                                    founded_node = self.current_scope.lookup_parent(y.split(" ")[2][:-1])
 
-                        node.data.expected_type=node.prev_sibling().data.expected_type
-                        if self.current_scope.lookup(y.split(" ")[2][:-1])==None:
-                            self.current_scope.define(y.split(" ")[2][:-1],node.data.expected_type)
+                            elif node.next_sibling().first_child().data.name=="T_LP" :
+                                founded_node = self.current_scope.lookup_parent(y.split(" ")[2][:-1])
+                            else :
+                                founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
+                            #function
+                        else:
+                            founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
+                        if founded_node==None:
+                            if not node.is_first_sibling():
+                                if node.prev_sibling().data.name=="Type":
+                                    node.data.expected_type = node.prev_sibling().data.expected_type
+                                    self.current_scope.define(y.split(" ")[2][:-1],node.data.expected_type)
+                                else:
+                                    print("error this Id never has been declared!  ",f'line is :{y.split(" ")[0]}')
+                            else:
+                                print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                        # elif node.parent.data.name!="FunctionDeclaration" and node.parent.data.name!="Parameter" and node.parent.data.name!="Parameter":
+                        #     if founded_node!=node.data.expected_type:
+                        #         print("it should be an error")
 
-                        elif self.current_scope.symbols[y.split(" ")[2][:-1]]!=node.data.expected_type:
-                            print("it should be an error")
-                        print(self.current_scope.symbols[y.split(" ")[2][:-1]])
-                        print(node.data.expected_type)
+
+
+
+
                     case "T_String":
                         string = y.split('"')[1]
                         node.data.value = string
@@ -236,7 +259,7 @@ class SemanticAnalyzer:
                     case "T_LC":
                         self._enter_scope()
                     case "T_RC":
-                        # self._exit_scope()
+                        self._exit_scope()
                         x=3
                     case "T_Int":
                         node.parent.data.expected_type="int"
@@ -262,7 +285,6 @@ loaded_tree = load_tree_from_file("parse_tree.json")
 # print_tree(loaded_tree)
 reverse_sibling_order(loaded_tree)
 # print_tree(loaded_tree)t
-print_tree(loaded_tree)
 semantic_analyzer=SemanticAnalyzer(loaded_tree)
 semantic_analyzer.analyze()
 print(semantic_analyzer.current_scope.symbols)
