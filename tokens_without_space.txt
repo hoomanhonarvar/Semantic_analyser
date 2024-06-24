@@ -1,0 +1,19 @@
+3 :T_Int
+3 :12 main
+3 :T_LP
+3 :T_RP
+3 :T_LC
+7 :T_If
+7 :T_LP
+7 :13 x
+7 :T_ROp_G
+7 :14 y
+7 :T_RP
+7 :T_LC
+8 :T_Print
+8 :T_LP
+8 :T_String  "x is greater than y"
+8 :T_RP
+8 :T_Semicolon
+9 :T_RC
+11 :T_RC

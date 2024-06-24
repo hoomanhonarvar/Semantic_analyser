@@ -5,7 +5,14 @@ from nutree import Tree, Node, IterMethod
 data=[]
 main_symbol_table = pd.DataFrame(data, columns=[ 'word', 'name', 'type','line'])
 #adding key words to symbol table
-
+f=open("tokens_without_space.txt")
+def reverse_sibling_order(node: Tree):
+    # If the node has children, reverse the order of the children
+    if node.children:
+        node.children.reverse()
+        # Recursively call the function on each child
+        for child in node.children:
+            reverse_sibling_order(child)
 def dict_to_tree(data, parent=Tree("Parse Tree")):
     node=parent.add(data["name"])
 
@@ -52,11 +59,11 @@ class SemanticAnalyzer:
         self.parse_tree=parse_tree
         self.global_scope=SymbolTable()
         self.current_scope=self.global_scope
-    def analyze(self):
-        return self._analyze_node(self.parse_tree)
+    def analyze(self,tokens_witouht_space=f):
+        return self._analyze_node(self.parse_tree,tokens_witouht_space)
 
-    def _analyze_node(self, node):
-        # # print("node is ",node.name)
+    def _analyze_node(self, node,f):
+        count=0
         # if (len(node.children))!=0:
         #     for i in node.children:
         #         # print(f"{i} child is :", i.name)
@@ -92,109 +99,120 @@ class SemanticAnalyzer:
         for node in loaded_tree.iterator(method=IterMethod.PRE_ORDER):
             if node==node.last_sibling():
                 #do the last semantic action
-                print("hello")
+                # print("hello")
+                x = 2
             if not node.is_leaf():
                 match node.name:
                     case "program":
-                        print("hello")
+                        x=2
                     case "FunctionDeclarations":
-                        print("hello")
+                        x=2
                     case "FunctionDeclaration":
-                        print("hello")
+                        x=2
                     case "ParameterList":
-                        print("hello")
+                        x=2
                     case "ParameterListPrime":
-                        print("hello")
+                        x=2
                     case "Parameter":
-                        print("hello")
+                        x=2
                     case "Declarations":
-                        print("hello")
+                        x=2
                     case "Declaration":
-                        print("hello")
+                        x=2
                     case "AssignmentPrime":
-                        print("hello")
+                        x=2
                     case "Type":
-                        print("hello")
+                        x=2
                     case "ArraySpecifier":
-                        print("hello")
+                        x=2
                     case "Num":
-                        print("hello")
+                        x=2
                     case "Statements":
-                        print("hello")
+                        x=2
                     case "Statement":
-                        print("hello")
+                        x=2
                     case "StatementPrime":
-                        print("hello")
+                        x=2
                     case "Assignment":
-                        print("hello")
+                        x=2
                     case "PrintStatement":
-                        print("hello")
+                        x=2
                     case "FormattingString":
-                        print("hello")
+                        x=2
                     case "ExpressionList":
-                        print("hello")
+                        x=2
                     case "ExpressionsList":
-                        print("hello")
+                        x=2
                     case "Loop":
-                        print("hello")
+                        x=2
                     case "IfStatement":
-                        print("hello")
+                        x=2
                     case "ElsePart":
-                        print("hello")
+                        x=2
                     case "Block":
-                        print("hello")
+                        x=2
                     case "Condition":
-                        print("hello")
+                        x=2
                     case "RO_Expression":
-                        print("hello")
+                        x=2
                     case "T_ROp":
-                        print("hello")
+                        x=2
                     case "ConditionPrime":
-                        print("hello")
+                        x=2
                     case "T_LOp":
-                        print("hello")
+                        x=2
                     case "Expression":
-                        print("hello")
+                        x=2
                     case "Term":
-                        print("hello")
+                        x=2
                     case "TermPrime":
-                        print("hello")
+                        x=2
                     case "Aop":
-                        print("hello")
+                        x=2
                     case "Factor":
-                        print("hello")
+                        x=2
                     case "FunctionCall":
-                        print("hello")
+                        x=2
                     case "ArgumentList":
-                        print("hello")
+                        x=2
                     case "ArgumentListPrime":
-                        print("hello")
+                        x=2
                     case "Condition_tmp":
-                        print("hello")
+                        x=2
                     case "FunctionCallPrime":
-                        print("hello")
+                        x=2
                     case "Assignment_Declaration":
-                        print("hello")
+                        x=2
                     case "Operation":
-                        print("hello")
+                        x=2
                     case "ExpressionPrime":
-                        print("hello")
+                        x=2
                     case "Exp_Or_None":
-                        print("hello")
-            else:
-                match node.name:
-                    case "T_Id":
-                        print("hello")
-                    case "T_String":
-                        print("hello")
-                    case "T_Character":
-                        print("hello")
-                    case "T_Decimal":
-                        print("hello")
-                    case "T_Hexadecimal":
-                        print("hello")
+                        x=2
                     case "_":
-                        print("hello")
+                        raise ValueError(f'Unknown node type: {node[0]}')
+            else:
+                if node.name!="ε":
+                    y=(f.readline())
+                    print(y,node.name)
+                match node.name:
+                    #self.current_scope.define(identifier[1], value)
+                    case "T_Id":
+                        x=2
+                    case "T_String":
+                        x=2
+                    case "T_Character":
+                        x=2
+                    case "T_Decimal":
+                        print(y,node.name)
+                    case "T_Hexadecimal":
+                        x=2
+                    case "T_LC":
+                        self._enter_scope()
+                    case "T_RC":
+                        self._exit_scope()
+                    case "_":
+                        x=2
 
 
     def _enter_scope(self):
@@ -205,7 +223,9 @@ class SemanticAnalyzer:
         self.current_scope = self.current_scope.parent
 
 loaded_tree = load_tree_from_file("parse_tree.json")
-
+# print_tree(loaded_tree)
+reverse_sibling_order(loaded_tree)
+print_tree(loaded_tree)
 semantic_analyzer=SemanticAnalyzer(loaded_tree)
 semantic_analyzer.analyze()
 

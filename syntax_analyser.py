@@ -199,6 +199,7 @@ grammar.calculate_follow()
 # pd.set_option('display.max_columns', None)
 grammar.fill_sparse_table()
 f=open("tokens.txt","r")
+f_prime=open("tokens_without_space.txt","w")
 stack=LifoQueue()
 stack.put("$")
 stack.put(grammar.start_variable)
@@ -227,6 +228,7 @@ while True:
     else:
         tmp = token.split(":")[1][:-1]
     if tmp!="T_Whitespace" and tmp!="T_Comment":
+        f_prime.write(token)
         if len(tmp.split(" "))>1:
             if tmp.split(" ")[0]=="T_String":
                 tmp="T_String"
@@ -254,7 +256,6 @@ while True:
             new_token = True
 
         if not panic_mode:
-
             while var not in grammar.terminals:
                 # print("hello")
                 # sparse_tree.print()
@@ -278,6 +279,14 @@ while True:
                     else:
                         stack.get()
                         node=sparse_tree.find_all(var)[-1]
+                        if len(node.children)>0:
+                            node = sparse_tree.find_all(var)[-2]
+                            if len(node.children) > 0:
+                                node = sparse_tree.find_all(var)[-3]
+                                if len(node.children) > 0:
+                                    node = sparse_tree.find_all(var)[-4]
+                                    if len(node.children) > 0:
+                                        node = sparse_tree.find_all(var)[-5]
                         # node = sparse_tree[var]
                         for production in reversed(grammar.sparse_table[tmp][var]):
                             stack.put(production)
@@ -378,7 +387,7 @@ while stack.qsize()!=0:
                 stack.get()
 
 if number_of_problems==0:
-    # sparse_tree.print()
+    sparse_tree.print()
     save_tree_to_file(sparse_tree, "parse_tree.json")
 
 
