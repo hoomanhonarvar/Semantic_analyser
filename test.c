@@ -5,9 +5,8 @@ int main() {
 
     // If-else statement
     int a = 3 ;
-    int a = 0xab23 ;
-    int a =" dsfklj";
-    int a = 'd' ;
+    bool a = 0xab23 ;
+    char a = 'd' ;
 
 }
 

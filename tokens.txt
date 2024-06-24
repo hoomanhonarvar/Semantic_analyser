@@ -25,7 +25,7 @@
 7 :T_Semicolon
 7 :T_Whitespace
 8 :T_Whitespace
-8 :T_Int
+8 :T_Bool
 8 :T_Whitespace
 8 :14 a
 8 :T_Whitespace
@@ -36,26 +36,17 @@
 8 :T_Semicolon
 8 :T_Whitespace
 9 :T_Whitespace
-9 :T_Int
+9 :T_Char
 9 :T_Whitespace
 9 :15 a
 9 :T_Whitespace
 9 :T_Assign
-9 :T_String  " dsfklj"
+9 :T_Whitespace
+9 :T_Character : 'd'
+9 :T_Whitespace
 9 :T_Semicolon
 9 :T_Whitespace
 10 :T_Whitespace
-10 :T_Int
-10 :T_Whitespace
-10 :17 a
-10 :T_Whitespace
-10 :T_Assign
-10 :T_Whitespace
-10 :T_Character : 'd'
-10 :T_Whitespace
-10 :T_Semicolon
-10 :T_Whitespace
+11 :T_RC
 11 :T_Whitespace
-12 :T_RC
 12 :T_Whitespace
-13 :T_Whitespace

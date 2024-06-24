@@ -12,6 +12,7 @@ class customNode:
         self.expected_type=""
         self.name=name
 
+
 f=open("tokens_without_space.txt")
 def reverse_sibling_order(node: Tree):
     # If the node has children, reverse the order of the children
@@ -35,7 +36,7 @@ def load_tree_from_file(filename):
     return dict_to_tree(data)
 
 def print_tree(node, level=0):
-    print("  " * level + node.name)
+    print("  " * level + node.data.name)
     for child in node.children:
         print_tree(child, level + 1)
 class SymbolTable:
@@ -43,15 +44,20 @@ class SymbolTable:
         self.parent=parent
         self.symbols={}
 
-    def define(self, name,value):
-        self.symbols[name]=value
+    def define(self, name,type):
+        print(len(self.symbols))
+        self.symbols[name]=type
     def lookup(self, name):
         if name in self.symbols:
             return self.symbols[name]
-        elif self.parent:
-            return self.parent.lookup(name)
+
+        # elif self.parent:
+        #     return self.parent.lookup(name)
+        # else:
+        #     return f'Undefined variable: {name}'
+
         else:
-            return f'Undefined variable: {name}'
+            return None
 def get_perv_siblings(node):
     list=[]
     if node!=node.first_sibling():
@@ -66,6 +72,7 @@ class SemanticAnalyzer:
         self.parse_tree=parse_tree
         self.global_scope=SymbolTable()
         self.current_scope=self.global_scope
+
     def analyze(self,tokens_witouht_space=f):
         return self._analyze_node(self.parse_tree,tokens_witouht_space)
 
@@ -205,22 +212,43 @@ class SemanticAnalyzer:
                 match node.data.name:
                     #self.current_scope.define(identifier[1], value)
                     case "T_Id":
-                        print(y, node.data.name)
 
+                        node.data.expected_type=node.prev_sibling().data.expected_type
+                        if self.current_scope.lookup(y.split(" ")[2][:-1])==None:
+                            self.current_scope.define(y.split(" ")[2][:-1],node.data.expected_type)
+
+                        elif self.current_scope.symbols[y.split(" ")[2][:-1]]!=node.data.expected_type:
+                            print("it should be an error")
+                        print(self.current_scope.symbols[y.split(" ")[2][:-1]])
+                        print(node.data.expected_type)
                     case "T_String":
                         string = y.split('"')[1]
+                        node.data.value = string
                     case "T_Character":
                         char = y.split("'")[1]
+                        node.data.value = char
                     case "T_Decimal":
                         num=y.split(" ")[2]
+                        node.data.value = num
                     case "T_Hexadecimal":
                         num = y.split(" ")[2]
+                        node.data.value=num
                     case "T_LC":
                         self._enter_scope()
                     case "T_RC":
-                        self._exit_scope()
+                        # self._exit_scope()
+                        x=3
+                    case "T_Int":
+                        node.parent.data.expected_type="int"
+                    case "T_Char":
+                        node.parent.data.expected_type="char"
+                    case "T_Bool":
+                        node.parent.data.expected_type="bool"
+                    case "T_String":
+                        node.parent.data.expected_type="string"
                     case "_":
                         print(y, node.name)
+
 
 
     def _enter_scope(self):
@@ -233,7 +261,8 @@ class SemanticAnalyzer:
 loaded_tree = load_tree_from_file("parse_tree.json")
 # print_tree(loaded_tree)
 reverse_sibling_order(loaded_tree)
-# print_tree(loaded_tree)
+# print_tree(loaded_tree)t
+print_tree(loaded_tree)
 semantic_analyzer=SemanticAnalyzer(loaded_tree)
 semantic_analyzer.analyze()
-
+print(semantic_analyzer.current_scope.symbols)
