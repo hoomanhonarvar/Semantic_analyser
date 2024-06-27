@@ -337,36 +337,67 @@ class SemanticAnalyzer:
                 match node.data.name:
                     #self.current_scope.define(identifier[1], value)
                     case "T_Id":
-                        if node.is_last_sibling():
-                            founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
-                        elif not node.next_sibling().is_leaf():
-                            if not node.next_sibling().first_child().is_leaf():
-                                if node.next_sibling().first_child().first_child().data.name=="T_LP" :
-                                    founded_node = self.current_scope.lookup_parent(y.split(" ")[2][:-1])
-
-                            elif node.next_sibling().first_child().data.name=="T_LP" :
-                                founded_node = self.current_scope.lookup_parent(y.split(" ")[2][:-1])
-                            else :
-                                founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
-                            #function
-                        else:
-                            founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
-                        if founded_node==None:
-                            if not node.is_first_sibling():
-                                if node.prev_sibling().data.name=="Type":
-                                    node.data.expected_type = node.prev_sibling().data.expected_type
-                                    self.current_scope.define(y.split(" ")[2][:-1],node.data.expected_type)
-                                else:
-                                    print("error this Id never has been declared!  ",f'line is :{y.split(" ")[0]}')
+                        name=y.split(" ")[2][:-1]
+                        if node.parent.data.name=="FunctionDeclaration":
+                            if self.global_scope.lookup_current(name)==None:
+                                node.data.type=node.prev_sibling().data.type
+                                #create a new function
+                                if name=="main":
+                                    if node.data.type!="int":
+                                        print("error type of main function is not int")
+                                self.global_scope.define(name,node.prev_sibling().data.type)
                             else:
+                                print("error this Id has been declared!  ",f'line is :{y.split(" ")[0]}')
+                        if node.parent.data.name=="Declaration":
+                            if self.current_scope.lookup_current(name) == None:
+                                node.data.type=node.prev_sibling().data.type
+                                self.current_scope.define(name, node.prev_sibling().data.type)
+                            else:
+                                print("error this Id has been declared!  ", f'line is :{y.split(" ")[0]}')
+                        if node.parent.data.name=="Statement":
+                            if node.next_sibling().first_child().data.name=="FunctionCallPrime":
+                                if self.current_scope.lookup_current(name) == None:
+                                    print("error this function Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                            else:
+                                if self.current_scope.lookup_current(name)==None:
+                                    print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                        if node.parent.data.name=="Assignment":
+                            if self.current_scope.lookup_current(name) == None:
                                 print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
-                        # elif node.parent.data.name!="FunctionDeclaration" and node.parent.data.name!="Parameter" and node.parent.data.name!="Parameter":
-                        #     if founded_node!=node.data.expected_type:
-                        #         print("it should be an error")
-                        if not node.is_first_sibling():
-                            node.data.type=node.prev_sibling().data.type
-                            node.data.value=y.split(" ")[2][:-1]
+                        if node.parent.data.name=="Factor":
+                            if self.current_scope.lookup_current(name) == None:
+                                print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
 
+                        # if node.is_last_sibling():
+                        #     founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
+                        # elif not node.next_sibling().is_leaf():
+                        #     if not node.next_sibling().first_child().is_leaf():
+                        #         if node.next_sibling().first_child().first_child().data.name=="T_LP" :
+                        #             founded_node = self.current_scope.lookup_parent(y.split(" ")[2][:-1])
+                        #
+                        #     elif node.next_sibling().first_child().data.name=="T_LP" :
+                        #         founded_node = self.current_scope.lookup_parent(y.split(" ")[2][:-1])
+                        #     else :
+                        #         founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
+                        #     #function
+                        # else:
+                        #     founded_node = self.current_scope.lookup_current(y.split(" ")[2][:-1])
+                        # if founded_node==None:
+                        #     if not node.is_first_sibling():
+                        #         if node.prev_sibling().data.name=="Type":
+                        #             node.data.expected_type = node.prev_sibling().data.expected_type
+                        #             self.current_scope.define(y.split(" ")[2][:-1],node.data.expected_type)
+                        #         else:
+                        #             print("error this Id never has been declared!  ",f'line is :{y.split(" ")[0]}')
+                        #     else:
+                        #         print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                        # # elif node.parent.data.name!="FunctionDeclaration" and node.parent.data.name!="Parameter" and node.parent.data.name!="Parameter":
+                        # #     if founded_node!=node.data.expected_type:
+                        # #         print("it should be an error")
+                        # if not node.is_first_sibling():
+                        #     node.data.type=node.prev_sibling().data.type
+                        #     node.data.value=y.split(" ")[2][:-1]
+                        #
 
 
 

@@ -1,19 +1,18 @@
-1 :T_Bool
-1 :12 main
-1 :T_LP
 1 :T_Int
-1 :13 a
+1 :12 a
+1 :T_LP
 1 :T_RP
 1 :T_LC
-2 :T_If
-2 :T_LP
-2 :T_Decimal 12
-2 :T_RP
-2 :T_LC
+2 :T_RC
+3 :T_Bool
+3 :13 main
+3 :T_LP
 3 :T_Int
 3 :14 a
-3 :T_Assign
-3 :T_Decimal 3
-3 :T_Semicolon
-4 :T_RC
+3 :T_RP
+3 :T_LC
+4 :15 b
+4 :T_LP
+4 :T_RP
+4 :T_Semicolon
 5 :T_RC
