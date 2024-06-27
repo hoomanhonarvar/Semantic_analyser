@@ -254,8 +254,40 @@
                   "name": "ParameterList",
                   "children": [
                     {
-                      "name": "\u03b5",
-                      "children": []
+                      "name": "ParameterListPrime",
+                      "children": [
+                        {
+                          "name": "\u03b5",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Parameter",
+                      "children": [
+                        {
+                          "name": "ArraySpecifier",
+                          "children": [
+                            {
+                              "name": "\u03b5",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "T_Id",
+                          "children": []
+                        },
+                        {
+                          "name": "Type",
+                          "children": [
+                            {
+                              "name": "T_Int",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 },
@@ -271,7 +303,7 @@
                   "name": "Type",
                   "children": [
                     {
-                      "name": "T_Int",
+                      "name": "T_Bool",
                       "children": []
                     }
                   ]

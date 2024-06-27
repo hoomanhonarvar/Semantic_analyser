@@ -93,6 +93,7 @@ class SemanticAnalyzer:
         self.parse_tree=parse_tree
         self.global_scope=SymbolTable()
         self.current_scope=self.global_scope
+        self.main_function=False
 
     def analyze(self,tokens_witouht_space=f):
         return self._analyze_node(self.parse_tree,tokens_witouht_space)
@@ -362,7 +363,9 @@ class SemanticAnalyzer:
                         # elif node.parent.data.name!="FunctionDeclaration" and node.parent.data.name!="Parameter" and node.parent.data.name!="Parameter":
                         #     if founded_node!=node.data.expected_type:
                         #         print("it should be an error")
-
+                        if not node.is_first_sibling():
+                            node.data.type=node.prev_sibling().data.type
+                            node.data.value=y.split(" ")[2][:-1]
 
 
 
@@ -397,11 +400,11 @@ class SemanticAnalyzer:
                         self._exit_scope()
                         x=3
                     case "T_Int":
-                        node.parent.data.expected_type="int"
+                        node.parent.data.type="int"
                     case "T_Char":
-                        node.parent.data.expected_type="char"
+                        node.parent.data.type="char"
                     case "T_Bool":
-                        node.parent.data.expected_type="bool"
+                        node.parent.data.type="bool"
                     case "T_True":
                         node.data.type="bool"
                         node.data.value=True
@@ -424,6 +427,11 @@ class SemanticAnalyzer:
                                 print("error not bool expression in if statement ",y)
                         if node.parent.data.name=="Loop":
                             after_Expression(node.prev_sibling().prev_sibling(),y)
+                        if node.parent.data.name=="FunctionDeclaration" and node.parent.children[1].data.value=="main":
+                            if node.prev_sibling().data.value!="ε":
+                                print("error parameter list in main function is not empty" , y)
+                            if node.first_sibling().data.type!="int":
+                                print("error function type of main function is not int ",y)
                     case "T_LOp_AND":
                         node.parent.data.value="T_LOp_AND"
                     case "T_LOp_OR":

@@ -1,6 +1,8 @@
-1 :T_Int
+1 :T_Bool
 1 :12 main
 1 :T_LP
+1 :T_Int
+1 :13 a
 1 :T_RP
 1 :T_LC
 2 :T_If
@@ -9,7 +11,7 @@
 2 :T_RP
 2 :T_LC
 3 :T_Int
-3 :13 a
+3 :14 a
 3 :T_Assign
 3 :T_Decimal 3
 3 :T_Semicolon
