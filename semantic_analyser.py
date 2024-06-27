@@ -450,6 +450,11 @@ class SemanticAnalyzer:
                     case "T_RB":
                         if node.parent.data.name=="ArraySpecifier":
                             after_Expression(node.prev_sibling(),y)
+                            if node.prev_sibling().data.type!="int":
+                                print("error not int expression for array specifier",y)
+                            else:
+                                if node.prev_sibling().data.value<1:
+                                    print("error expression int array specifier is less than 1")
                     case "T_Semicolon":
                         if node.prev_sibling().first_child()=="Assignment":
                             after_Expression(node.prev_sibling().first_child(),y)

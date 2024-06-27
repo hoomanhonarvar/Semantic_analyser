@@ -12,6 +12,12 @@
 2 :T_Whitespace
 2 :13 a
 2 :T_Whitespace
+2 :T_LB
+2 :T_Whitespace
+2 :T_Decimal -1
+2 :T_Whitespace
+2 :T_RB
+2 :T_Whitespace
 2 :T_Assign
 2 :T_Whitespace
 2 :T_Decimal 3

@@ -116,7 +116,57 @@
                                   "name": "ArraySpecifier",
                                   "children": [
                                     {
-                                      "name": "\u03b5",
+                                      "name": "ArraySpecifier",
+                                      "children": [
+                                        {
+                                          "name": "\u03b5",
+                                          "children": []
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "T_RB",
+                                      "children": []
+                                    },
+                                    {
+                                      "name": "Expression",
+                                      "children": [
+                                        {
+                                          "name": "ExpressionPrime",
+                                          "children": [
+                                            {
+                                              "name": "\u03b5",
+                                              "children": []
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "Term",
+                                          "children": [
+                                            {
+                                              "name": "TermPrime",
+                                              "children": [
+                                                {
+                                                  "name": "\u03b5",
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "Factor",
+                                              "children": [
+                                                {
+                                                  "name": "T_Decimal",
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "T_LB",
                                       "children": []
                                     }
                                   ]
