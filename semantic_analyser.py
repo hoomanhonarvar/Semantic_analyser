@@ -36,7 +36,7 @@ def load_tree_from_file(filename):
     return dict_to_tree(data)
 
 def print_tree(node, level=0):
-    print("  " * level + node.data.name)
+    print("  " * level + node.data.name + "   = "+str(node.data.value))
     for child in node.children:
         print_tree(child, level + 1)
 class SymbolTable:
@@ -68,6 +68,26 @@ def get_perv_siblings(node):
             prev_node=prev_node.prev_sibling()
             list.append(prev_node)
     return list
+
+def after_Expression(node,y):
+    tmp_node=node.last_child()
+    while tmp_node.data.value!="ε":
+        tmp_node=tmp_node.last_child()
+    tmp_node.data.value=tmp_node.prev_sibling().data.value
+    tmp_node.data.type=tmp_node.prev_sibling().data.type
+    while tmp_node!=node.last_child():
+        if tmp_node.parent.data.type!=tmp_node.data.type:
+            print("error unmatched type :",y)
+        else:
+            if tmp_node.parent.first_child().data.name=="T_AOp_PL":
+                tmp_node.parent.data.value+=tmp_node.data.value
+            else:
+                tmp_node.parent.data.value -= tmp_node.data.value
+        tmp_node=tmp_node.parent
+    node.data.value=tmp_node.data.value
+    node.data.type=tmp_node.data.type
+
+
 class SemanticAnalyzer:
     def __init__(self,parse_tree):
         self.parse_tree=parse_tree
@@ -111,12 +131,14 @@ class SemanticAnalyzer:
         #         # self._analyze_node(i)
         # else:
         #     print(node.name)
+
         for node in loaded_tree.iterator(method=IterMethod.PRE_ORDER):
             if node==node.last_sibling():
                 #do the last semantic action
                 # print("hello")
                 x = 2
             if not node.is_leaf():
+
                 match node.data.name:
                     case "program":
                         x=2
@@ -131,7 +153,12 @@ class SemanticAnalyzer:
                     case "Parameter":
                         x=2
                     case "Declarations":
-                        x=2
+                        if node.prev_sibling().data.name=="AssignmentPrime":
+                            if node.prev_sibling().data.value!="ε":
+                                after_Expression(node.prev_sibling().last_child(),y)
+
+
+
                     case "Declaration":
                         x=2
                     case "AssignmentPrime":
@@ -181,17 +208,30 @@ class SemanticAnalyzer:
                     case "Term":
                         x=2
                     case "TermPrime":
-                        x=2
+                        node.last_child()
+                        if node.prev_sibling().first_child()=="T_LOp_NOT" and node.parent.data.name=="Term":
+                            node.prev_sibling().data.type="bool"
+                            if node.prev_sibling().children[1].data.type!=node.prev_sibling().data.type:
+                                print("error you use ! token with not bool factor")
+                            else:
+                                node.prev_sibling().data.value=not node.prev_sibling().children[1].data.value
+                        print(node.prev_sibling().data.value)
+                        node.data.value=node.prev_sibling().data.value
+                        node.data.type=node.prev_sibling().data.type
                     case "Aop":
                         x=2
                     case "Factor":
-                        x=2
+                        if node.parent.data.name =="TermPrime":
+                            if node.prev_sibling().data.name=="Operation":
+                                node.prev_sibling().data.value=node.prev_sibling().first_child().data.value
                     case "FunctionCall":
                         x=2
                     case "ArgumentList":
                         x=2
                     case "ArgumentListPrime":
-                        x=2
+                        if node.parent.data.name=="ArgumentList" or node.parent.data.name=="ArgumentListPrime":
+                            after_Expression(node.prev_sibling(),y)
+
                     case "Condition_tmp":
                         x=2
                     case "FunctionCallPrime":
@@ -201,7 +241,75 @@ class SemanticAnalyzer:
                     case "Operation":
                         x=2
                     case "ExpressionPrime":
-                        x=2
+                        tmp_node=node.prev_sibling().last_child()
+                        if node.prev_sibling().last_child().data.value=="ε":
+                            node.prev_sibling().data.value=node.prev_sibling().first_child().data.value
+                            node.prev_sibling().data.type=node.prev_sibling().first_child().data.type
+                        else:
+                            while tmp_node.data.value!="ε":
+                                tmp_node=tmp_node.last_child()
+                            tmp_node.data.value=tmp_node.prev_sibling().data.value
+                            tmp_node.data.type=tmp_node.prev_sibling().data.type
+                            while tmp_node!=node.prev_sibling().last_child():
+                                if tmp_node.parent.data.type!=tmp_node.data.type:
+                                    print("error unmatched type :",y)
+                                else:
+                                    match tmp_node.parent.first_child().data.value:
+                                        case "T_LOp_AND":
+                                            tmp_node.parent.data.value= tmp_node.parent.data.value and tmp_node.data.value
+                                        case "T_LOp_OR":
+                                            tmp_node.parent.data.value = tmp_node.parent.data.value or tmp_node.data.value
+                                        case "T_AOp_DV":
+                                            tmp_node.parent.data.value = tmp_node.parent.data.value / tmp_node.data.value
+                                        case "T_AOp_ML":
+                                            tmp_node.parent.data.value = tmp_node.parent.data.value * tmp_node.data.value
+                                        case "T_AOp_RM":
+                                            tmp_node.parent.data.value = tmp_node.parent.data.value % tmp_node.data.value
+                                        case "T_ROp_NE":
+                                            tmp_node.parent.data.type = "bool"
+                                            if tmp_node.parent.data.value!=tmp_node.data.value:
+                                                tmp_node.parent.data.value=False
+                                            else:
+                                                tmp_node.parent.data.value=True
+                                        case "T_ROp_E":
+                                            tmp_node.parent.data.type = "bool"
+                                            if tmp_node.parent.data.value == tmp_node.data.value:
+                                                tmp_node.parent.data.value = True
+                                            else:
+                                                tmp_node.parent.data.value = False
+                                        case "T_ROp_L":
+                                            tmp_node.parent.data.type = "bool"
+                                            if tmp_node.parent.data.value < tmp_node.data.value:
+                                                tmp_node.parent.data.value = True
+                                            else:
+                                                tmp_node.parent.data.value = False
+                                        case "T_ROp_LE":
+                                            tmp_node.parent.data.type = "bool"
+                                            if tmp_node.parent.data.value <= tmp_node.data.value:
+                                                tmp_node.parent.data.value = True
+                                            else:
+                                                tmp_node.parent.data.value = False
+                                        case "T_ROp_GE":
+                                            tmp_node.parent.data.type = "bool"
+                                            if tmp_node.parent.data.value >= tmp_node.data.value:
+                                                tmp_node.parent.data.value = True
+                                            else:
+                                                tmp_node.parent.data.value = False
+                                        case "T_ROp_G":
+                                            tmp_node.parent.data.type = "bool"
+                                            if tmp_node.parent.data.value > tmp_node.data.value:
+                                                tmp_node.parent.data.value = True
+                                            else:
+                                                tmp_node.parent.data.value = False
+                                tmp_node=tmp_node.parent
+                            node.prev_sibling().data.type=tmp_node.data.type
+                            node.prev_sibling().data.value=tmp_node.data.value
+
+
+                            node.data.value=node.prev_sibling().data.value
+                            node.data.type=node.prev_sibling().data.type
+
+
                     case "Exp_Or_None":
                         x=2
                     case "_":
@@ -245,17 +353,29 @@ class SemanticAnalyzer:
 
 
                     case "T_String":
-                        string = y.split('"')[1]
-                        node.data.value = string
+                        string = y.split("T_String")[1]
+                        node.data.value = string[3:-2]
+                        node.data.type="char"
+                        node.parent.data.value=node.data.value
+                        node.parent.data.type=node.data.type
                     case "T_Character":
                         char = y.split("'")[1]
                         node.data.value = char
+                        node.data.type="char"
+                        node.parent.data.value = node.data.value
+                        node.parent.data.type = node.data.type
                     case "T_Decimal":
                         num=y.split(" ")[2]
-                        node.data.value = num
+                        node.data.value = int(num)
+                        node.data.type="int"
+                        node.parent.data.value = node.data.value
+                        node.parent.data.type = node.data.type
                     case "T_Hexadecimal":
                         num = y.split(" ")[2]
-                        node.data.value=num
+                        node.data.value=int(num,16)
+                        node.data.type="int"
+                        node.parent.data.value = node.data.value
+                        node.parent.data.type = node.data.type
                     case "T_LC":
                         self._enter_scope()
                     case "T_RC":
@@ -267,10 +387,62 @@ class SemanticAnalyzer:
                         node.parent.data.expected_type="char"
                     case "T_Bool":
                         node.parent.data.expected_type="bool"
-                    case "T_String":
-                        node.parent.data.expected_type="string"
+                    case "T_True":
+                        node.data.type="bool"
+                        node.data.value=True
+                        node.parent.data.value = node.data.value
+                        node.parent.data.type = node.data.type
+                    case "T_False":
+                        node.data.type="bool"
+                        node.data.value=False
+                        node.parent.data.value = node.data.value
+                        node.parent.data.type = node.data.type
+                    case "T_LOp_NOT":
+                        x=2
+                    case "T_RP":
+                        if node.parent.data.name == "Factor":
+                            node.parent.data.type = node.prev_sibling().data.type
+                            node.parent.data.value = node.prev_sibling().data.value
+                        if node.parent.data.name=="IfStatement":
+                            after_Expression(node.prev_sibling(),y)
+                        if node.parent.data.name=="Loop":
+                            after_Expression(node.prev_sibling().prev_sibling(),y)
+                    case "T_LOp_AND":
+                        node.parent.data.value="T_LOp_AND"
+                    case "T_LOp_OR":
+                        node.parent.data.value="T_LOp_OR"
+                    case "T_ROp_NE":
+                        node.parent.data.value="T_ROp_NE"
+                    case "T_ROp_E":
+                        node.parent.data.value = "T_ROp_E"
+                    case "T_ROp_L":
+                        node.parent.data.value = "T_ROp_L"
+                    case "T_ROp_G":
+                        node.parent.data.value = "T_ROp_G"
+                    case "T_ROp_LE":
+                        node.parent.data.value = "T_ROp_LE"
+                    case "T_ROp_GE":
+                        node.parent.data.value = "T_ROp_GE"
+                    case "T_AOp_DV":
+                        node.parent.data.value = "T_AOp_DV"
+                    case "T_AOp_ML":
+                        node.parent.data.value = "T_AOp_ML"
+                    case "T_AOp_RM":
+                        node.parent.data.value = "T_AOp_RM"
+                    case "ε":
+                        node.parent.data.value="ε"
+
+                    case "T_RB":
+                        if node.parent.data.name=="ArraySpecifier":
+                            after_Expression(node.prev_sibling(),y)
+                    case "T_Semicolon":
+                        if node.prev_sibling().first_child()=="Assignment":
+                            after_Expression(node.prev_sibling().first_child(),y)
+
                     case "_":
                         print(y, node.name)
+
+
 
 
 
@@ -284,7 +456,7 @@ class SemanticAnalyzer:
 loaded_tree = load_tree_from_file("parse_tree.json")
 # print_tree(loaded_tree)
 reverse_sibling_order(loaded_tree)
-# print_tree(loaded_tree)t
 semantic_analyzer=SemanticAnalyzer(loaded_tree)
 semantic_analyzer.analyze()
 print(semantic_analyzer.current_scope.symbols)
+print_tree(loaded_tree)

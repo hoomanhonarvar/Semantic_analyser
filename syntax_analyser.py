@@ -168,7 +168,7 @@ grammar = Grammar({
     "TermPrime": [["Operation", "Factor","TermPrime"], ["ε"]],
     "Operation":[["Aop"],["T_LOp"],["T_ROp"]],
     "Aop":[["T_AOp_DV"],["T_AOp_ML"],["T_AOp_RM"]],
-    "T_LOp":[["T_LOp_AND"],["T_LOp_OR"],["T_LOp_NOT"]],
+    "T_LOp":[["T_LOp_AND"],["T_LOp_OR"]],
     "T_ROp": [["T_ROp_NE"], ["T_ROp_E"], ["T_ROp_L"], ["T_ROp_G"], ["T_ROp_LE"], ["T_ROp_GE"]],
     "Factor": [["T_Id","FunctionCallPrime"], ["T_Decimal"], ["T_Hexadecimal"], ["T_Character"], ["T_String"], ["T_True"], ["T_False"], ["T_LOp_NOT","Factor"], ["T_LP","Expression","T_RP"]],
     "FunctionCallPrime":[[ "T_LP","ArgumentList","T_RP"], ["ε"]],
