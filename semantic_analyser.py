@@ -420,6 +420,8 @@ class SemanticAnalyzer:
                             node.parent.data.value = node.prev_sibling().data.value
                         if node.parent.data.name=="IfStatement":
                             after_Expression(node.prev_sibling(),y)
+                            if node.prev_sibling().data.type!="bool":
+                                print("error not bool expression in if statement ",y)
                         if node.parent.data.name=="Loop":
                             after_Expression(node.prev_sibling().prev_sibling(),y)
                     case "T_LOp_AND":

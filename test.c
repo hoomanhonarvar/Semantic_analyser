@@ -1,4 +1,6 @@
 int main(  ) {
-     int a [ -1 ] = 3;
+     if ( 12 ){
+        int a = 3 ;
+     }
 }
 
