@@ -36,7 +36,7 @@ def load_tree_from_file(filename):
     return dict_to_tree(data)
 
 def print_tree(node, level=0):
-    print("  " * level + node.data.name + "   = "+str(node.data.value))
+    print("  " * level + node.data.name + "   = "+str(node.data.value)+ "   = "+str(node.data.type))
     for child in node.children:
         print_tree(child, level + 1)
 class SymbolTable:
@@ -256,15 +256,30 @@ class SemanticAnalyzer:
                                 else:
                                     match tmp_node.parent.first_child().data.value:
                                         case "T_LOp_AND":
-                                            tmp_node.parent.data.value= tmp_node.parent.data.value and tmp_node.data.value
+                                            if tmp_node.parent.data.type!="bool":
+                                                print("error logical operator for not bool")
+                                            else:
+                                                tmp_node.parent.data.value= tmp_node.parent.data.value and tmp_node.data.value
                                         case "T_LOp_OR":
-                                            tmp_node.parent.data.value = tmp_node.parent.data.value or tmp_node.data.value
+                                            if tmp_node.parent.data.type!="bool":
+                                                print("error logical operator for not bool")
+                                            else:
+                                                tmp_node.parent.data.value = tmp_node.parent.data.value or tmp_node.data.value
                                         case "T_AOp_DV":
-                                            tmp_node.parent.data.value = tmp_node.parent.data.value / tmp_node.data.value
+                                            if tmp_node.parent.data.type!="int":
+                                                print("error Arithmatic operator for not int")
+                                            else:
+                                                tmp_node.parent.data.value = tmp_node.parent.data.value / tmp_node.data.value
                                         case "T_AOp_ML":
-                                            tmp_node.parent.data.value = tmp_node.parent.data.value * tmp_node.data.value
+                                            if tmp_node.parent.data.type != "int":
+                                                print("error Arithmatic operator for not int")
+                                            else:
+                                                tmp_node.parent.data.value = tmp_node.parent.data.value * tmp_node.data.value
                                         case "T_AOp_RM":
-                                            tmp_node.parent.data.value = tmp_node.parent.data.value % tmp_node.data.value
+                                            if tmp_node.parent.data.type != "int":
+                                                print("error Arithmatic operator for not int")
+                                            else:
+                                                tmp_node.parent.data.value = tmp_node.parent.data.value % tmp_node.data.value
                                         case "T_ROp_NE":
                                             tmp_node.parent.data.type = "bool"
                                             if tmp_node.parent.data.value!=tmp_node.data.value:

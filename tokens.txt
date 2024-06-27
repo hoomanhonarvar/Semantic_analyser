@@ -15,14 +15,6 @@
 2 :T_Assign
 2 :T_Whitespace
 2 :T_Decimal 3
-2 :T_Whitespace
-2 :T_AOp_ML
-2 :T_Whitespace
-2 :T_Decimal 3
-2 :T_Whitespace
-2 :T_AOp_MN
-2 :T_Whitespace
-2 :T_True
 2 :T_Semicolon
 2 :T_Whitespace
 3 :T_RC

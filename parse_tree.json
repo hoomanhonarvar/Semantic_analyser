@@ -67,39 +67,7 @@
                                           "name": "ExpressionPrime",
                                           "children": [
                                             {
-                                              "name": "ExpressionPrime",
-                                              "children": [
-                                                {
-                                                  "name": "\u03b5",
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "name": "Term",
-                                              "children": [
-                                                {
-                                                  "name": "TermPrime",
-                                                  "children": [
-                                                    {
-                                                      "name": "\u03b5",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "name": "Factor",
-                                                  "children": [
-                                                    {
-                                                      "name": "T_True",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "name": "T_AOp_MN",
+                                              "name": "\u03b5",
                                               "children": []
                                             }
                                           ]
@@ -111,36 +79,8 @@
                                               "name": "TermPrime",
                                               "children": [
                                                 {
-                                                  "name": "TermPrime",
-                                                  "children": [
-                                                    {
-                                                      "name": "\u03b5",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "name": "Factor",
-                                                  "children": [
-                                                    {
-                                                      "name": "T_Decimal",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "name": "Operation",
-                                                  "children": [
-                                                    {
-                                                      "name": "Aop",
-                                                      "children": [
-                                                        {
-                                                          "name": "T_AOp_ML",
-                                                          "children": []
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
+                                                  "name": "\u03b5",
+                                                  "children": []
                                                 }
                                               ]
                                             },

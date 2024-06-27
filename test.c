@@ -1,4 +1,4 @@
 int main(  ) {
-     int a = 3 * 3 - true;
+     int a = 3;
 }
 
