@@ -25,7 +25,7 @@
 2 :T_Whitespace
 3 :T_Bool
 3 :T_Whitespace
-3 :16 main
+3 :16 c
 3 :T_LP
 3 :T_Whitespace
 3 :T_Int

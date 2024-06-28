@@ -112,39 +112,6 @@ class SemanticAnalyzer:
 
     def _analyze_node(self, node,f):
         count=0
-        # if (len(node.children))!=0:
-        #     for i in node.children:
-        #         # print(f"{i} child is :", i.name)
-        #         if node[0] == 'number':
-        #             return node  # No semantic check needed for number literals
-        #         elif node[0] == 'identifier':
-        #             self.current_scope.lookup(node[1])
-        #             return node
-        #         elif node[0] == 'binop':
-        #             left = self._analyze_node(node[1])
-        #             right = self._analyze_node(node[3])
-        #             op = node[2][1]
-        #             if op in ('+', '-', '*', '/'):
-        #                 if left[0] != 'number' or right[0] != 'number':
-        #                     raise TypeError('Operands must be numbers')
-        #             return ('binop', left, node[2], right)
-        #         elif node[0] == 'assignment':
-        #             identifier = node[1]
-        #             value = self._analyze_node(node[2])
-        #             self.current_scope.define(identifier[1], value)
-        #             return ('assignment', identifier, value)
-        #         elif node[0] == 'block':
-        #             self._enter_scope()
-        #             for stmt in node[1]:
-        #                 self._analyze_node(stmt)
-        #             self._exit_scope()
-        #             return ('block', node[1])
-        #         else:
-        #             raise ValueError(f'Unknown node type: {node[0]}')
-        #         # self._analyze_node(i)
-        # else:
-        #     print(node.name)
-
         for node in loaded_tree.iterator(method=IterMethod.PRE_ORDER):
             if node==node.last_sibling():
                 #do the last semantic action
@@ -519,6 +486,14 @@ class SemanticAnalyzer:
 
                     case "_":
                         print(y, node.name)
+        available_main=False
+        for function in self.global_scope.symbols:
+            if function=="main":
+                available_main=True
+
+        if not available_main:
+            print("error whole program doesn't have main function")
+
 
 
 

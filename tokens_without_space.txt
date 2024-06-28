@@ -13,7 +13,7 @@
 1 :T_LC
 2 :T_RC
 3 :T_Bool
-3 :16 main
+3 :16 c
 3 :T_LP
 3 :T_Int
 3 :17 a
