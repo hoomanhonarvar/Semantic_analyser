@@ -87,7 +87,19 @@ def after_Expression(node,y):
     node.data.value=tmp_node.data.value
     node.data.type=tmp_node.data.type
 
+def after_ParameterList(node,y):
+    if node.data.value!="ε":
+        tmp_node=node.last_child()
+        while tmp_node.data.value!="ε":
+            tmp_node=tmp_node.last_child()
 
+        tmp_node.data.value=[]
+        tmp_node.data.value.append([tmp_node.prev_sibling().data.type,tmp_node.prev_sibling().data.value])
+        while tmp_node!=node.last_child():
+            for i in tmp_node.data.value:
+                tmp_node.parent.data.value.append(i)
+            tmp_node=tmp_node.parent
+        node.data.value=tmp_node.data.value
 class SemanticAnalyzer:
     def __init__(self,parse_tree):
         self.parse_tree=parse_tree
@@ -150,7 +162,8 @@ class SemanticAnalyzer:
                     case "ParameterList":
                         x=2
                     case "ParameterListPrime":
-                        x=2
+                        node.data.value=[]
+                        node.data.value.append([node.prev_sibling().data.type,node.prev_sibling().data.value])
                     case "Parameter":
                         x=2
                     case "Declarations":
@@ -338,6 +351,9 @@ class SemanticAnalyzer:
                     #self.current_scope.define(identifier[1], value)
                     case "T_Id":
                         name=y.split(" ")[2][:-1]
+                        if node.parent.data.name=="Parameter":
+                            node.parent.data.value=name
+                            node.parent.data.type=node.prev_sibling().data.type
                         if node.parent.data.name=="FunctionDeclaration":
                             if self.global_scope.lookup_current(name)==None:
                                 node.data.type=node.prev_sibling().data.type
@@ -463,6 +479,9 @@ class SemanticAnalyzer:
                                 print("error parameter list in main function is not empty" , y)
                             if node.first_sibling().data.type!="int":
                                 print("error function type of main function is not int ",y)
+                        if node.parent.data.name=="FunctionDeclaration":
+                            after_ParameterList(node.prev_sibling(),y)
+
                     case "T_LOp_AND":
                         node.parent.data.value="T_LOp_AND"
                     case "T_LOp_OR":
