@@ -1,6 +1,7 @@
-int a (){
+int a (int x , bool c , char w){
 }
 bool main( int a ) {
-      b() ;
+      a( 10 , true ) ;
+      int a;
 }
 

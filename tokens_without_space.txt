@@ -1,18 +1,32 @@
 1 :T_Int
 1 :12 a
 1 :T_LP
+1 :T_Int
+1 :13 x
+1 :T_Comma
+1 :T_Bool
+1 :14 c
+1 :T_Comma
+1 :T_Char
+1 :15 w
 1 :T_RP
 1 :T_LC
 2 :T_RC
 3 :T_Bool
-3 :13 main
+3 :16 main
 3 :T_LP
 3 :T_Int
-3 :14 a
+3 :17 a
 3 :T_RP
 3 :T_LC
-4 :15 b
+4 :18 a
 4 :T_LP
+4 :T_Decimal 10
+4 :T_Comma
+4 :T_True
 4 :T_RP
 4 :T_Semicolon
-5 :T_RC
+5 :T_Int
+5 :19 a
+5 :T_Semicolon
+6 :T_RC
