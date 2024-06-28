@@ -29,4 +29,7 @@
 5 :T_Int
 5 :19 a
 5 :T_Semicolon
-6 :T_RC
+6 :T_Return
+6 :T_Decimal 1
+6 :T_Semicolon
+7 :T_RC

@@ -86,7 +86,11 @@ def after_Expression(node,y):
         tmp_node=tmp_node.parent
     node.data.value=tmp_node.data.value
     node.data.type=tmp_node.data.type
+def get_type_of_current_function(node):
 
+    while node.data.name!="FunctionDeclaration":
+        node=node.parent
+    return node.first_child().data.type
 def after_ParameterList(node,y):
     if node.data.value!="ε":
         tmp_node=node.last_child()
@@ -483,6 +487,11 @@ class SemanticAnalyzer:
                     case "T_Semicolon":
                         if node.prev_sibling().first_child()=="Assignment":
                             after_Expression(node.prev_sibling().first_child(),y)
+                        if node.prev_sibling().data.name=="Expression" and node.first_sibling().data.name=="T_Return":
+                            after_Expression(node.prev_sibling(), y)
+                            if node.prev_sibling().data.type!=get_type_of_current_function(node):
+                                print("error return type is not equal to its function" , y)
+
 
                     case "_":
                         print(y, node.name)

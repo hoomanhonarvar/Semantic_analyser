@@ -56,6 +56,13 @@
 5 :19 a
 5 :T_Semicolon
 5 :T_Whitespace
-6 :T_RC
 6 :T_Whitespace
+6 :T_Return
+6 :T_Whitespace
+6 :T_Decimal 1
+6 :T_Semicolon
+6 :T_Whitespace
+7 :T_RC
 7 :T_Whitespace
+8 :T_Whitespace
+9 :T_Whitespace

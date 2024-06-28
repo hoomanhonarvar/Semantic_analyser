@@ -39,8 +39,63 @@
                                   "name": "Statements",
                                   "children": [
                                     {
-                                      "name": "\u03b5",
-                                      "children": []
+                                      "name": "Statements",
+                                      "children": [
+                                        {
+                                          "name": "\u03b5",
+                                          "children": []
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "Statement",
+                                      "children": [
+                                        {
+                                          "name": "T_Semicolon",
+                                          "children": []
+                                        },
+                                        {
+                                          "name": "Expression",
+                                          "children": [
+                                            {
+                                              "name": "ExpressionPrime",
+                                              "children": [
+                                                {
+                                                  "name": "\u03b5",
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "Term",
+                                              "children": [
+                                                {
+                                                  "name": "TermPrime",
+                                                  "children": [
+                                                    {
+                                                      "name": "\u03b5",
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "Factor",
+                                                  "children": [
+                                                    {
+                                                      "name": "T_Decimal",
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "T_Return",
+                                          "children": []
+                                        }
+                                      ]
                                     }
                                   ]
                                 },
