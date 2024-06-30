@@ -1,67 +1,235 @@
-2 :T_Int
-2 :12 add
+2 :T_Char
+2 :12 greet
 2 :T_LP
-2 :T_Int
-2 :13 a
-2 :T_Comma
-2 :T_Int
-2 :14 b
 2 :T_RP
 2 :T_LC
-3 :T_Return
-3 :15 a
-3 :T_AOp_PL
-3 :16 b
+3 :T_Print
+3 :T_LP
+3 :T_String  "Hello, world!n"
+3 :T_RP
 3 :T_Semicolon
-4 :T_RC
-7 :T_Int
-7 :17 main
-7 :T_LP
-7 :T_RP
-7 :T_LC
-8 :T_Int
-8 :18 x
-8 :T_Assign
-8 :T_Decimal 10
-8 :T_Semicolon
-9 :T_Int
-9 :19 y
+4 :T_Return
+4 :T_String  "Hello"
+4 :T_Semicolon
+5 :T_RC
+8 :T_Bool
+8 :15 printNumber
+8 :T_LP
+8 :T_Char
+8 :16 num
+8 :T_RP
+8 :T_LC
+9 :17 num
 9 :T_Assign
-9 :T_Decimal 20
+9 :T_Character : 'd'
 9 :T_Semicolon
-10 :T_Int
-10 :20 z
-10 :T_Assign
-10 :21 add
+10 :T_Print
 10 :T_LP
-10 :22 x
+10 :T_String  "Number: %dn"
 10 :T_Comma
-10 :23 y
+10 :19 "Number: %dn"num
 10 :T_RP
 10 :T_Semicolon
-12 :T_If
-12 :T_LP
-12 :24 x
-12 :T_ROp_G
-12 :25 y
-12 :T_RP
-12 :T_LC
-13 :T_Print
+11 :T_RC
+13 :T_Int
+13 :20 main
 13 :T_LP
-13 :T_String  "x is greater than yn"
 13 :T_RP
-13 :T_Semicolon
-14 :T_RC
-14 :T_Else
-14 :T_LC
-15 :T_Print
-15 :T_LP
-15 :T_String  "x is not greater than yn"
-15 :T_RP
+13 :T_LC
+15 :T_Int
+15 :21 x
+15 :T_Comma
+15 :22 y
 15 :T_Semicolon
-16 :T_RC
-18 :T_Return
-18 :28 z
-18 :T_Semicolon
-19 :T_RC
+16 :T_Char
+16 :23 z
+16 :T_Semicolon
+17 :T_Bool
+17 :24 flag
+17 :T_Semicolon
+20 :T_Int
+20 :25 arr
+20 :T_LB
+20 :T_Decimal 10
+20 :T_RB
+20 :T_Semicolon
+23 :T_Int
+23 :26 a
+23 :T_Comma
+23 :27 b
+23 :T_Comma
+23 :28 c
+23 :T_Semicolon
+26 :T_Int
+26 :29 d
+26 :T_Comma
+26 :30 e
+26 :T_Comma
+26 :31 f
+26 :T_Semicolon
+29 :32 x
+29 :T_Assign
+29 :T_Decimal 10
+29 :T_Semicolon
+30 :33 y
+30 :T_Assign
+30 :T_Decimal 5
+30 :T_Semicolon
+32 :T_If
+32 :T_LP
+32 :34 x
+32 :T_ROp_G
+32 :35 y
+32 :T_RP
+32 :T_LC
+33 :T_Print
+33 :T_LP
+33 :T_String  "x is greater than yn"
+33 :T_RP
+33 :T_Semicolon
+34 :T_RC
+34 :T_Else
+35 :T_Print
+35 :T_LP
+35 :T_String  "x is less than or equal to yn"
+35 :T_RP
+35 :T_Semicolon
+38 :T_If
+38 :T_LP
+38 :38 x
+38 :T_ROp_G
+38 :39 y
+38 :T_RP
+38 :T_LC
+39 :T_Print
+39 :T_LP
+39 :T_String  "x is greater than yn"
+39 :T_RP
+39 :T_Semicolon
+40 :T_RC
+40 :T_Else
+41 :T_If
+41 :T_LP
+41 :41 x
+41 :T_ROp_L
+41 :42 y
+41 :T_RP
+42 :T_Print
+42 :T_LP
+42 :T_String  "x is less than yn"
+42 :T_RP
+42 :T_Semicolon
+45 :T_If
+45 :T_LP
+45 :44 x
+45 :T_ROp_G
+45 :45 y
+45 :T_RP
+45 :T_LC
+46 :T_Print
+46 :T_LP
+46 :T_String  "x is greater than yn"
+46 :T_RP
+46 :T_Semicolon
+47 :T_RC
+50 :T_For
+50 :T_LP
+50 :T_Int
+50 :47 i
+50 :T_Assign
+50 :T_Decimal 0
+50 :T_Semicolon
+50 :48 i
+50 :T_ROp_L
+50 :T_Decimal 10
+50 :T_Semicolon
+50 :49 i
+50 :T_Assign
+50 :50 i
+50 :T_AOp_PL
+50 :T_Decimal 1
+50 :T_RP
+51 :T_Print
+51 :T_LP
+51 :T_String  "%d "
+51 :T_Comma
+51 :52 "%d "i
+51 :T_RP
+51 :T_Semicolon
+54 :T_Int
+54 :53 j
+54 :T_Assign
+54 :T_Decimal 0
+54 :T_Semicolon
+56 :T_For
+56 :T_LP
+56 :T_Int
+56 :54 k
+56 :T_Assign
+56 :T_Decimal 0
+56 :T_Semicolon
+56 :55 k
+56 :T_ROp_L
+56 :T_Decimal 10
+56 :T_Semicolon
+56 :56 k
+56 :T_Assign
+56 :57 k
+56 :T_AOp_PL
+56 :T_Decimal 1
+56 :T_RP
+57 :T_Continue
+57 :T_Semicolon
+60 :T_Int
+60 :58 num
+60 :T_Assign
+60 :T_Decimal 10
+60 :T_Semicolon
+61 :T_Print
+61 :T_LP
+61 :T_String  "Number: %dn"
+61 :T_Comma
+61 :60 "Number: %dn"num
+61 :T_RP
+61 :T_Semicolon
+64 :T_Char
+64 :61 ch
+64 :T_Assign
+64 :T_Character : 'A'
+64 :T_Semicolon
+65 :T_Print
+65 :T_LP
+65 :T_String  "Character: %cn"
+65 :T_Comma
+65 :63 "Character: %cn"ch
+65 :T_RP
+65 :T_Semicolon
+68 :T_Char
+68 :64 str
+68 :T_LB
+68 :T_Decimal 0
+68 :T_RB
+68 :T_Assign
+68 :T_String  "Hello, world!"
+68 :T_Semicolon
+69 :T_Print
+69 :T_LP
+69 :T_String  "String: %dn"
+69 :T_Comma
+69 :67 "String: %dn"str
+69 :T_RP
+69 :T_Semicolon
+72 :68 greet
+72 :T_LP
+72 :T_RP
+72 :T_Semicolon
+73 :69 printNumber
+73 :T_LP
+73 :T_Decimal 3
+73 :T_RP
+73 :T_Semicolon
+75 :T_Return
+75 :T_Decimal 0
+75 :T_Semicolon
+76 :T_RC
 end

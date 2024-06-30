@@ -219,9 +219,9 @@ class SemanticAnalyzer:
                         if node.prev_sibling().data.name=="AssignmentPrime":
                             if node.prev_sibling().data.value!="ε":
                                 after_Expression(node.prev_sibling().last_child(),y)
-                        if node.parent.data.name=="Declaration":
-                            if node.parent.children[1].data.type!=node.parent.children[3].last_child().data.type:
-                                print("error unmatched type in declaration ",y.split(" ")[0])
+                        # if node.parent.data.name=="Declaration":
+                        #     if node.parent.children[1].data.type!=node.parent.children[3].last_child().data.type:
+                        #         print("error unmatched type in declaration ",y.split(" ")[0])
 
 
                     case "Declaration":
@@ -334,6 +334,8 @@ class SemanticAnalyzer:
                         if len(y.split(" "))<=2:
                             break
                         name=y.split(" ")[2][:-1]
+                        if name[0]=='"':
+                            name=y.split('"')[2][:-1]
                         node.data.value=name
                         if node.parent.data.name=="Parameter":
                             node.parent.data.value=name
@@ -350,6 +352,15 @@ class SemanticAnalyzer:
                                 self.current_scope.define(name, [node.prev_sibling().data.type,False])
                             else:
                                 print("error this Id has been declared!  ", f'line is :{y.split(" ")[0]}')
+                        if node.parent.data.name=="Declarations":
+                            tmp_node=node
+                            while tmp_node.data.name!="Declaration":
+                                tmp_node=tmp_node.parent
+                            if self.current_scope.lookup_current(name) == None:
+                                node.data.type = tmp_node.first_child().data.type
+                                self.current_scope.define(name, [node.data.type, False])
+                            else:
+                                print("error this Id has been declared!  ", f'line is :{y.split(" ")[0]}')
                         if node.parent.data.name=="Statement":
                             if node.next_sibling().first_child().data.name=="FunctionCallPrime":
                                 if self.current_scope.lookup_current(name) == None:
@@ -364,23 +375,23 @@ class SemanticAnalyzer:
 
                             else:
                                 if self.current_scope.lookup_current(name)==None:
-                                    print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                                    print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}' , " ",name)
                                 else:
                                     node.data.type = self.current_scope.lookup_current(name)
                         if node.parent.data.name=="Assignment":
                             if self.current_scope.lookup_current(name) == None:
-                                print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                                print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}'," ",name)
                             else:
                                 node.data.type=self.current_scope.lookup_current(name)[0]
                         if node.parent.data.name=="Factor":
                             if node.next_sibling().first_child().data.name=="ε":
                                 if self.current_scope.lookup_current(name) == None:
-                                    print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                                    print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}'," ",name,"  hello")
                                 else:
                                     node.data.type=self.current_scope.lookup_current(name)[0]
                             else:
                                 if self.global_scope.lookup_current(name) == None:
-                                    print("error this functino Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                                    print("error this functino Id never has been declared!  ", f'line is :{y.split(" ")[0]}'," ",name)
                                 else:
                                     node.data.type=self.global_scope.lookup_current(name)[0]
 
@@ -415,8 +426,8 @@ class SemanticAnalyzer:
                         self._enter_scope()
                         if node.parent.parent.data.name=="FunctionDeclaration":
                             if node.parent.parent.children[3].data.value!="ε":
-                                for i in node.parent.parent.children[3].data.value:
-                                    self.current_scope.define(i[1],[i[0],False])
+                                for i in range(0,len(node.parent.parent.children[3].data.value)):
+                                    self.current_scope.define(node.parent.parent.children[3].data.value[i][1],[node.parent.parent.children[3].data.value[i][0],False])
                     case "T_RC":
                         self._exit_scope()
                         x=3
@@ -473,9 +484,15 @@ class SemanticAnalyzer:
                                         if len(node.prev_sibling().data.value)!=len(func[1]):
                                             print("error unmatched argument list of function " ,y.split(" ")[0])
                                         else:
-                                            for i,j in func[1],node.prev_sibling().data.value:
-                                                if i[0]!=j[0]:
-                                                    print("error unmatched type of argument of function",y.split(" ")[0])
+                                            if func[1]!="ε":
+                                                for i in range(0,len(func[1])):
+                                                    if func[1][i][0]!=node.prev_sibling().data.value[i][0]:
+                                                        print("error unmatched type of argument of function",y.split(" ")[0])
+                                                # for j in node.prev_sibling().data.value:
+                                                #     print(j)
+                                                # for i,j in func[1],node.prev_sibling().data.value:
+                                                #     if i[0]!=j[0]:
+                                                #         print("error unmatched type of argument of function",y.split(" ")[0])
 
 
                     case "T_LOp_AND":
