@@ -80,6 +80,7 @@ def after_Expression(node,y):
             print("error unmatched type :",y)
         else:
             if tmp_node.parent.first_child().data.name=="T_AOp_PL":
+                print("hello")
                 tmp_node.parent.data.value +=tmp_node.data.value
             else:
                 tmp_node.parent.data.value -= tmp_node.data.value
@@ -312,6 +313,8 @@ class SemanticAnalyzer:
                         x=2
                     case "ExpressionPrime":
                         after_Term(node.prev_sibling(),y)
+                        node.data.value=node.prev_sibling().data.value
+                        node.data.type=node.prev_sibling().data.type
                     case "Exp_Or_None":
                         x=2
                     case "_":
@@ -328,7 +331,6 @@ class SemanticAnalyzer:
                         if node.parent.data.name=="Parameter":
                             node.parent.data.value=name
                             node.parent.data.type=node.prev_sibling().data.type
-
                         if node.parent.data.name=="FunctionDeclaration":
                             if self.global_scope.lookup_current(name)==None:
                                 node.data.value=name
@@ -361,12 +363,16 @@ class SemanticAnalyzer:
                             else:
                                 node.data.type=self.current_scope.lookup_current(name)[0]
                         if node.parent.data.name=="Factor":
-                            if self.current_scope.lookup_current(name) == None:
-                                print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                            if node.next_sibling().first_child().data.name=="ε":
+                                if self.current_scope.lookup_current(name) == None:
+                                    print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                                else:
+                                    node.data.type=self.current_scope.lookup_current(name)[0]
                             else:
-                                print(self.current_scope.lookup_current(name))
-
-                                node.data.type=self.current_scope.lookup_current(name)[0]
+                                if self.global_scope.lookup_current(name) == None:
+                                    print("error this functino Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
+                                else:
+                                    node.data.type=self.global_scope.lookup_current(name)[0]
 
 
 
