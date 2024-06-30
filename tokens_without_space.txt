@@ -1,49 +1,67 @@
-1 :T_Int
-1 :12 main
-1 :T_LP
-1 :T_Int
-1 :13 x
-1 :T_RP
-1 :T_LC
-3 :T_RC
-4 :T_Bool
-4 :14 c
-4 :T_LP
-4 :T_Int
-4 :15 a
-4 :T_RP
-4 :T_LC
-5 :T_If
-5 :T_LP
-5 :16 a
-5 :T_ROp_G
-5 :T_Decimal 3
-5 :T_RP
-5 :T_LC
-6 :T_For
-6 :T_LP
-6 :T_Int
-6 :17 i
-6 :T_Assign
-6 :T_Decimal 9
-6 :T_Semicolon
-6 :18 i
-6 :T_ROp_LE
-6 :T_Decimal 3
-6 :T_Semicolon
-6 :19 i
-6 :T_Assign
-6 :20 i
-6 :T_AOp_PL
-6 :T_Decimal 1
-6 :T_RP
+2 :T_Int
+2 :12 add
+2 :T_LP
+2 :T_Int
+2 :13 a
+2 :T_Comma
+2 :T_Int
+2 :14 b
+2 :T_RP
+2 :T_LC
+3 :T_Return
+3 :15 a
+3 :T_AOp_PL
+3 :16 b
+3 :T_Semicolon
+4 :T_RC
 7 :T_Int
-7 :21 x
-7 :T_Assign
-7 :22 main
+7 :17 main
 7 :T_LP
-7 :23 i
 7 :T_RP
-7 :T_Semicolon
-8 :T_RC
-10 :T_RC
+7 :T_LC
+8 :T_Int
+8 :18 x
+8 :T_Assign
+8 :T_Decimal 10
+8 :T_Semicolon
+9 :T_Int
+9 :19 y
+9 :T_Assign
+9 :T_Decimal 20
+9 :T_Semicolon
+10 :T_Int
+10 :20 z
+10 :T_Assign
+10 :21 add
+10 :T_LP
+10 :22 x
+10 :T_Comma
+10 :23 y
+10 :T_RP
+10 :T_Semicolon
+12 :T_If
+12 :T_LP
+12 :24 x
+12 :T_ROp_G
+12 :25 y
+12 :T_RP
+12 :T_LC
+13 :T_Print
+13 :T_LP
+13 :T_String  "x is greater than yn"
+13 :T_RP
+13 :T_Semicolon
+14 :T_RC
+14 :T_Else
+14 :T_LC
+15 :T_Print
+15 :T_LP
+15 :T_String  "x is not greater than yn"
+15 :T_RP
+15 :T_Semicolon
+16 :T_RC
+18 :T_Return
+18 :28 z
+18 :T_Semicolon
+19 :T_RC
+end

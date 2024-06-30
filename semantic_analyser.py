@@ -49,6 +49,9 @@ class SymbolTable:
     def lookup_current(self, name):
         if name in self.symbols:
             return self.symbols[name]
+        elif self.parent:
+            if name in self.parent.symbols:
+                return self.parent.symbols[name]
         # else:
         #     return f'Undefined variable: {name}'
         else:
@@ -80,7 +83,6 @@ def after_Expression(node,y):
             print("error unmatched type :",y)
         else:
             if tmp_node.parent.first_child().data.name=="T_AOp_PL":
-                print("hello")
                 tmp_node.parent.data.value +=tmp_node.data.value
             else:
                 tmp_node.parent.data.value -= tmp_node.data.value
@@ -306,7 +308,10 @@ class SemanticAnalyzer:
                     case "Condition_tmp":
                         x=2
                     case "FunctionCallPrime":
-                        node.parent.data.type=node.prev_sibling().data.type
+                        if node.parent.data.name=="Factor":
+                            node.parent.data.type=node.prev_sibling().data.type
+                        elif node.parent.data.name=="StatementPrime":
+                            node.parent.parent.data.type=node.parent.prev_sibling().data.type
                     case "Assignment_Declaration":
                         x=2
                     case "Operation":
@@ -326,6 +331,8 @@ class SemanticAnalyzer:
                 match node.data.name:
                     #self.current_scope.define(identifier[1], value)
                     case "T_Id":
+                        if len(y.split(" "))<=2:
+                            break
                         name=y.split(" ")[2][:-1]
                         node.data.value=name
                         if node.parent.data.name=="Parameter":
@@ -346,6 +353,9 @@ class SemanticAnalyzer:
                         if node.parent.data.name=="Statement":
                             if node.next_sibling().first_child().data.name=="FunctionCallPrime":
                                 if self.current_scope.lookup_current(name) == None:
+                                    print("error this function Id never has been declared!  ",
+                                          f'line is :{y.split(" ")[0]}')
+                                else:
                                     if self.current_scope.lookup_current(name)[1]==False:
                                         print("error this function Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
                                     else:
@@ -454,17 +464,18 @@ class SemanticAnalyzer:
                             after_ParameterList(node.prev_sibling(),y)
                             # func=self.global_scope.lookup_current(node.parent.prev_sibling().data.value)
                             if node.parent.parent.data.name=="Factor":
-                                print("hello",node.parent.prev_sibling().data.value ,node.parent.prev_sibling().name)
+                                x=2
                             if node.parent.parent.data.name=="StatementPrime":
                                 func = self.global_scope.lookup_current(node.parent.parent.prev_sibling().data.value)
-                                if func[2]==True:
-                                    node.parent.data.type=func[0]
-                                    if len(node.prev_sibling().data.value)!=len(func[1]):
-                                        print("error unmatched argument list of function " ,y.split(" ")[0])
-                                    else:
-                                        for i,j in func[1],node.prev_sibling().data.value:
-                                            if i[0]!=j[0]:
-                                                print("error unmatched type of argument of function",y.split(" ")[0])
+                                if func!=None:
+                                    if func[2]==True:
+                                        node.parent.data.type=func[0]
+                                        if len(node.prev_sibling().data.value)!=len(func[1]):
+                                            print("error unmatched argument list of function " ,y.split(" ")[0])
+                                        else:
+                                            for i,j in func[1],node.prev_sibling().data.value:
+                                                if i[0]!=j[0]:
+                                                    print("error unmatched type of argument of function",y.split(" ")[0])
 
 
                     case "T_LOp_AND":
@@ -551,5 +562,4 @@ loaded_tree = load_tree_from_file("parse_tree.json")
 reverse_sibling_order(loaded_tree)
 semantic_analyzer=SemanticAnalyzer(loaded_tree)
 semantic_analyzer.analyze()
-print(semantic_analyzer.current_scope.symbols)
 print_tree(loaded_tree)
