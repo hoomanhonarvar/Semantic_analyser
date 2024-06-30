@@ -93,13 +93,9 @@ def after_Term(node,y):
     tmp_node.data.value = tmp_node.prev_sibling().data.value
     tmp_node.data.type = tmp_node.prev_sibling().data.type
     while tmp_node != node.last_child():
-        print(tmp_node.data.value, " ",tmp_node.data.type)
-        print(tmp_node.parent.data.value, " ", tmp_node.parent.data.type," ",tmp_node.parent.data.name)
         if tmp_node.parent.data.type != tmp_node.data.type:
             print("error unmatched type :", y)
         else:
-            print("salam")
-            print(tmp_node.parent.first_child().data.value)
             match tmp_node.parent.first_child().data.value:
                 case "T_LOp_AND":
                     if tmp_node.parent.data.type != "bool":
@@ -157,8 +153,6 @@ def after_Term(node,y):
                     else:
                         tmp_node.parent.data.value = False
                 case "T_ROp_G":
-                    print("fuck")
-                    print(tmp_node.parent.data.value)
                     tmp_node.parent.data.type = "bool"
                     if tmp_node.parent.data.value > tmp_node.data.value:
                         tmp_node.parent.data.value = True
@@ -318,98 +312,6 @@ class SemanticAnalyzer:
                         x=2
                     case "ExpressionPrime":
                         after_Term(node.prev_sibling(),y)
-                        # tmp_node=node.prev_sibling().last_child()
-                        # if node.prev_sibling().last_child().data.value=="ε":
-                        #     node.prev_sibling().data.value=node.prev_sibling().first_child().data.value
-                        #     node.prev_sibling().data.type=node.prev_sibling().first_child().data.type
-                        # else:
-                        #     while tmp_node.data.value!="ε":
-                        #         tmp_node=tmp_node.last_child()
-                        #     tmp_node.data.value=tmp_node.prev_sibling().data.value
-                        #     tmp_node.data.type=tmp_node.prev_sibling().data.type
-                        #     while tmp_node!=node.prev_sibling().last_child():
-                        #
-                        #         if tmp_node.parent.data.type!=tmp_node.data.type  :
-                        #             print(tmp_node.parent.data.type," alkj ",tmp_node.data.type)
-                        #             print(tmp_node.parent.data.name," aljk ",tmp_node.data.name)
-                        #             print(tmp_node.parent.data.value," aljk ",tmp_node.data.value)
-                        #
-                        #             print(tmp_node.parent.parent.data.name)
-                        #             print("error unmatched type :",y.split(" ")[0])
-                        #         else:
-                        #             match tmp_node.parent.first_child().data.value:
-                        #                 case "T_LOp_AND":
-                        #                     if tmp_node.parent.data.type!="bool":
-                        #                         print("error logical operator for not bool" ,y.split(" ")[0])
-                        #                     else:
-                        #                         tmp_node.parent.data.value= tmp_node.parent.data.value and tmp_node.data.value
-                        #                 case "T_LOp_OR":
-                        #                     if tmp_node.parent.data.type!="bool":
-                        #                         print("error logical operator for not bool",y.split(" ")[0])
-                        #                     else:
-                        #                         tmp_node.parent.data.value = tmp_node.parent.data.value or tmp_node.data.value
-                        #                 case "T_AOp_DV":
-                        #                     if tmp_node.parent.data.type!="int":
-                        #                         print("error Arithmatic operator for not int",y.split(" ")[0])
-                        #                     else:
-                        #                         tmp_node.parent.data.value = tmp_node.parent.data.value / tmp_node.data.value
-                        #                 case "T_AOp_ML":
-                        #                     if tmp_node.parent.data.type != "int":
-                        #                         print("error Arithmatic operator for not int",y.split(" ")[0])
-                        #                     else:
-                        #                         tmp_node.parent.data.value = tmp_node.parent.data.value * tmp_node.data.value
-                        #                 case "T_AOp_RM":
-                        #                     if tmp_node.parent.data.type != "int":
-                        #                         print("error Arithmatic operator for not int",y.split(" ")[0])
-                        #                     else:
-                        #                         tmp_node.parent.data.value = tmp_node.parent.data.value % tmp_node.data.value
-                        #                 case "T_ROp_NE":
-                        #                     tmp_node.parent.data.type = "bool"
-                        #                     if tmp_node.parent.data.value!=tmp_node.data.value:
-                        #                         tmp_node.parent.data.value=False
-                        #                     else:
-                        #                         tmp_node.parent.data.value=True
-                        #                 case "T_ROp_E":
-                        #                     tmp_node.parent.data.type = "bool"
-                        #                     if tmp_node.parent.data.value == tmp_node.data.value:
-                        #                         tmp_node.parent.data.value = True
-                        #                     else:
-                        #                         tmp_node.parent.data.value = False
-                        #                 case "T_ROp_L":
-                        #                     tmp_node.parent.data.type = "bool"
-                        #                     if tmp_node.parent.data.value < tmp_node.data.value:
-                        #                         tmp_node.parent.data.value = True
-                        #                     else:
-                        #                         tmp_node.parent.data.value = False
-                        #                 case "T_ROp_LE":
-                        #                     tmp_node.parent.data.type = "bool"
-                        #                     if tmp_node.parent.data.value <= tmp_node.data.value:
-                        #                         tmp_node.parent.data.value = True
-                        #                     else:
-                        #                         tmp_node.parent.data.value = False
-                        #                 case "T_ROp_GE":
-                        #                     tmp_node.parent.data.type = "bool"
-                        #                     if tmp_node.parent.data.value >= tmp_node.data.value:
-                        #                         tmp_node.parent.data.value = True
-                        #                     else:
-                        #                         tmp_node.parent.data.value = False
-                        #                 case "T_ROp_G":
-                        #                     print("fuck")
-                        #                     print(tmp_node.parent.data.value)
-                        #                     tmp_node.parent.data.type = "bool"
-                        #                     if tmp_node.parent.data.value > tmp_node.data.value:
-                        #                         tmp_node.parent.data.value = True
-                        #                     else:
-                        #                         tmp_node.parent.data.value = False
-                        #         tmp_node=tmp_node.parent
-                        #     node.prev_sibling().data.type=tmp_node.data.type
-                        #     node.prev_sibling().data.value=tmp_node.data.value
-                        #
-                        #
-                        # node.data.value=node.prev_sibling().data.value
-                        # node.data.type=node.prev_sibling().data.type
-
-
                     case "Exp_Or_None":
                         x=2
                     case "_":
@@ -462,8 +364,9 @@ class SemanticAnalyzer:
                             if self.current_scope.lookup_current(name) == None:
                                 print("error this Id never has been declared!  ", f'line is :{y.split(" ")[0]}')
                             else:
-                                print(self.current_scope.lookup_current(name)[0])
-                                node.data.type=self.current_scope.lookup_current(name)
+                                print(self.current_scope.lookup_current(name))
+
+                                node.data.type=self.current_scope.lookup_current(name)[0]
 
 
 
@@ -497,7 +400,7 @@ class SemanticAnalyzer:
                         if node.parent.parent.data.name=="FunctionDeclaration":
                             if node.parent.parent.children[3].data.value!="ε":
                                 for i in node.parent.parent.children[3].data.value:
-                                    self.current_scope.define(i[1],i[0])
+                                    self.current_scope.define(i[1],[i[0],False])
                     case "T_RC":
                         self._exit_scope()
                         x=3

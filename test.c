@@ -1,6 +1,7 @@
 bool c( int a ) {
       if (a > 3){
-        x = 23;
+        for (int i =9 ; i<=3 ; i = i + 1)
+            print("salam");
       }
 
 }
