@@ -11,349 +11,8 @@
               "name": "FunctionDeclarations",
               "children": [
                 {
-                  "name": "FunctionDeclarations",
-                  "children": [
-                    {
-                      "name": "\u03b5",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "name": "FunctionDeclaration",
-                  "children": [
-                    {
-                      "name": "Block",
-                      "children": [
-                        {
-                          "name": "T_RC",
-                          "children": []
-                        },
-                        {
-                          "name": "Statements",
-                          "children": [
-                            {
-                              "name": "Statements",
-                              "children": [
-                                {
-                                  "name": "Statements",
-                                  "children": [
-                                    {
-                                      "name": "Statements",
-                                      "children": [
-                                        {
-                                          "name": "\u03b5",
-                                          "children": []
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "name": "Statement",
-                                      "children": [
-                                        {
-                                          "name": "T_Semicolon",
-                                          "children": []
-                                        },
-                                        {
-                                          "name": "Expression",
-                                          "children": [
-                                            {
-                                              "name": "ExpressionPrime",
-                                              "children": [
-                                                {
-                                                  "name": "\u03b5",
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "name": "Term",
-                                              "children": [
-                                                {
-                                                  "name": "TermPrime",
-                                                  "children": [
-                                                    {
-                                                      "name": "\u03b5",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "name": "Factor",
-                                                  "children": [
-                                                    {
-                                                      "name": "T_Decimal",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "T_Return",
-                                          "children": []
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "name": "Statement",
-                                  "children": [
-                                    {
-                                      "name": "T_Semicolon",
-                                      "children": []
-                                    },
-                                    {
-                                      "name": "Declaration",
-                                      "children": [
-                                        {
-                                          "name": "Declarations",
-                                          "children": [
-                                            {
-                                              "name": "\u03b5",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "AssignmentPrime",
-                                          "children": [
-                                            {
-                                              "name": "\u03b5",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "ArraySpecifier",
-                                          "children": [
-                                            {
-                                              "name": "\u03b5",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "T_Id",
-                                          "children": []
-                                        },
-                                        {
-                                          "name": "Type",
-                                          "children": [
-                                            {
-                                              "name": "T_Int",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "Statement",
-                              "children": [
-                                {
-                                  "name": "T_Semicolon",
-                                  "children": []
-                                },
-                                {
-                                  "name": "StatementPrime",
-                                  "children": [
-                                    {
-                                      "name": "FunctionCallPrime",
-                                      "children": [
-                                        {
-                                          "name": "T_RP",
-                                          "children": []
-                                        },
-                                        {
-                                          "name": "ArgumentList",
-                                          "children": [
-                                            {
-                                              "name": "ArgumentListPrime",
-                                              "children": [
-                                                {
-                                                  "name": "ArgumentListPrime",
-                                                  "children": [
-                                                    {
-                                                      "name": "\u03b5",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "name": "Expression",
-                                                  "children": [
-                                                    {
-                                                      "name": "ExpressionPrime",
-                                                      "children": [
-                                                        {
-                                                          "name": "\u03b5",
-                                                          "children": []
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "name": "Term",
-                                                      "children": [
-                                                        {
-                                                          "name": "TermPrime",
-                                                          "children": [
-                                                            {
-                                                              "name": "\u03b5",
-                                                              "children": []
-                                                            }
-                                                          ]
-                                                        },
-                                                        {
-                                                          "name": "Factor",
-                                                          "children": [
-                                                            {
-                                                              "name": "T_True",
-                                                              "children": []
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "name": "T_Comma",
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "name": "Expression",
-                                              "children": [
-                                                {
-                                                  "name": "ExpressionPrime",
-                                                  "children": [
-                                                    {
-                                                      "name": "\u03b5",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "name": "Term",
-                                                  "children": [
-                                                    {
-                                                      "name": "TermPrime",
-                                                      "children": [
-                                                        {
-                                                          "name": "\u03b5",
-                                                          "children": []
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "name": "Factor",
-                                                      "children": [
-                                                        {
-                                                          "name": "T_Decimal",
-                                                          "children": []
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "T_LP",
-                                          "children": []
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "name": "T_Id",
-                                  "children": []
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "name": "T_LC",
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "name": "T_RP",
-                      "children": []
-                    },
-                    {
-                      "name": "ParameterList",
-                      "children": [
-                        {
-                          "name": "ParameterListPrime",
-                          "children": [
-                            {
-                              "name": "\u03b5",
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "name": "Parameter",
-                          "children": [
-                            {
-                              "name": "ArraySpecifier",
-                              "children": [
-                                {
-                                  "name": "\u03b5",
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "name": "T_Id",
-                              "children": []
-                            },
-                            {
-                              "name": "Type",
-                              "children": [
-                                {
-                                  "name": "T_Int",
-                                  "children": []
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "name": "T_LP",
-                      "children": []
-                    },
-                    {
-                      "name": "T_Id",
-                      "children": []
-                    },
-                    {
-                      "name": "Type",
-                      "children": [
-                        {
-                          "name": "T_Bool",
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
+                  "name": "\u03b5",
+                  "children": []
                 }
               ]
             },
@@ -371,8 +30,223 @@
                       "name": "Statements",
                       "children": [
                         {
-                          "name": "\u03b5",
-                          "children": []
+                          "name": "Statements",
+                          "children": [
+                            {
+                              "name": "\u03b5",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Statement",
+                          "children": [
+                            {
+                              "name": "IfStatement",
+                              "children": [
+                                {
+                                  "name": "ElsePart",
+                                  "children": [
+                                    {
+                                      "name": "\u03b5",
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Statement",
+                                  "children": [
+                                    {
+                                      "name": "Block",
+                                      "children": [
+                                        {
+                                          "name": "T_RC",
+                                          "children": []
+                                        },
+                                        {
+                                          "name": "Statements",
+                                          "children": [
+                                            {
+                                              "name": "Statements",
+                                              "children": [
+                                                {
+                                                  "name": "\u03b5",
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "Statement",
+                                              "children": [
+                                                {
+                                                  "name": "T_Semicolon",
+                                                  "children": []
+                                                },
+                                                {
+                                                  "name": "StatementPrime",
+                                                  "children": [
+                                                    {
+                                                      "name": "AssignmentPrime",
+                                                      "children": [
+                                                        {
+                                                          "name": "Expression",
+                                                          "children": [
+                                                            {
+                                                              "name": "ExpressionPrime",
+                                                              "children": [
+                                                                {
+                                                                  "name": "\u03b5",
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "name": "Term",
+                                                              "children": [
+                                                                {
+                                                                  "name": "TermPrime",
+                                                                  "children": [
+                                                                    {
+                                                                      "name": "\u03b5",
+                                                                      "children": []
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "name": "Factor",
+                                                                  "children": [
+                                                                    {
+                                                                      "name": "T_Decimal",
+                                                                      "children": []
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "name": "T_Assign",
+                                                          "children": []
+                                                        },
+                                                        {
+                                                          "name": "ArraySpecifier",
+                                                          "children": [
+                                                            {
+                                                              "name": "\u03b5",
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "T_Id",
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "T_LC",
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "T_RP",
+                                  "children": []
+                                },
+                                {
+                                  "name": "Expression",
+                                  "children": [
+                                    {
+                                      "name": "ExpressionPrime",
+                                      "children": [
+                                        {
+                                          "name": "\u03b5",
+                                          "children": []
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "Term",
+                                      "children": [
+                                        {
+                                          "name": "TermPrime",
+                                          "children": [
+                                            {
+                                              "name": "TermPrime",
+                                              "children": [
+                                                {
+                                                  "name": "\u03b5",
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "Factor",
+                                              "children": [
+                                                {
+                                                  "name": "T_Decimal",
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "Operation",
+                                              "children": [
+                                                {
+                                                  "name": "T_ROp",
+                                                  "children": [
+                                                    {
+                                                      "name": "T_ROp_G",
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "Factor",
+                                          "children": [
+                                            {
+                                              "name": "FunctionCallPrime",
+                                              "children": [
+                                                {
+                                                  "name": "\u03b5",
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "T_Id",
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "T_LP",
+                                  "children": []
+                                },
+                                {
+                                  "name": "T_If",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     },
@@ -393,79 +267,7 @@
                       "name": "ParameterListPrime",
                       "children": [
                         {
-                          "name": "ParameterListPrime",
-                          "children": [
-                            {
-                              "name": "ParameterListPrime",
-                              "children": [
-                                {
-                                  "name": "\u03b5",
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "name": "Parameter",
-                              "children": [
-                                {
-                                  "name": "ArraySpecifier",
-                                  "children": [
-                                    {
-                                      "name": "\u03b5",
-                                      "children": []
-                                    }
-                                  ]
-                                },
-                                {
-                                  "name": "T_Id",
-                                  "children": []
-                                },
-                                {
-                                  "name": "Type",
-                                  "children": [
-                                    {
-                                      "name": "T_Char",
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "T_Comma",
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "name": "Parameter",
-                          "children": [
-                            {
-                              "name": "ArraySpecifier",
-                              "children": [
-                                {
-                                  "name": "\u03b5",
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "name": "T_Id",
-                              "children": []
-                            },
-                            {
-                              "name": "Type",
-                              "children": [
-                                {
-                                  "name": "T_Bool",
-                                  "children": []
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "name": "T_Comma",
+                          "name": "\u03b5",
                           "children": []
                         }
                       ]
@@ -511,7 +313,7 @@
                   "name": "Type",
                   "children": [
                     {
-                      "name": "T_Int",
+                      "name": "T_Bool",
                       "children": []
                     }
                   ]
