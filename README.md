@@ -26,10 +26,10 @@ lexeme.py file.pl
 
 * run syntax analyser
 
-  ```
-  syntax_analyser.py
-  ```
-  * new output should be parse_tree.json
+```
+syntax_analyser.py
+```
+* new output should be parse_tree.json
 
 * now run 
 ```
